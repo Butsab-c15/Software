@@ -21,6 +21,7 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/me", dashboardRouter);
+
 // ทํางานทุก request ที่เข้ามา
 app.use(function (req, res, next) {
   var err = createError(404);

@@ -1,0 +1,161 @@
+body {
+  background: #f8f9fa;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  padding: 18px 0;
+}
+
+.navbar-brand {
+  font-size: 32px;
+
+  font-weight: bold;
+}
+
+.nav-link {
+  margin: 0 12px;
+
+  font-weight: 500;
+}
+
+.search-box {
+  width: 430px;
+}
+
+/* ---------- Hero ---------- */
+
+.banner-img {
+  height: 620px;
+
+  object-fit: cover;
+
+  filter: brightness(60%);
+}
+
+.hero-caption {
+  bottom: 28%;
+}
+
+.hero-caption h1 {
+  font-size: 60px;
+
+  font-weight: 700;
+}
+
+.hero-caption p {
+  font-size: 22px;
+
+  margin: 25px 0;
+}
+
+/* ---------- Card ---------- */
+
+.shoe-card {
+  border: none;
+
+  border-radius: 18px;
+
+  transition: 0.3s;
+
+  overflow: hidden;
+}
+
+.shoe-card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  height: 240px;
+
+  object-fit: cover;
+}
+/* ================= BRAND CARD ================= */
+
+.brand-card {
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.brand-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.brand-card img {
+  transition: 0.3s;
+}
+
+.brand-card:hover img {
+  transform: scale(1.1);
+}
+/* ================= HERO ================= */
+
+.hero {
+  padding: 90px 0;
+  background: #f8f9fa;
+}
+
+.hero-image {
+  max-width: 550px;
+}
+
+/* ================= PRODUCT CARD ================= */
+
+.card {
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  height: 220px;
+
+  object-fit: contain;
+}
+
+/* ================= BRAND ================= */
+
+.brand-card {
+  transition: 0.3s;
+}
+
+.brand-card:hover {
+  transform: translateY(-8px);
+}
+
+.brand-card:hover img {
+  transform: scale(1.1);
+}
+
+/* ================= NEWSLETTER ================= */
+
+form input {
+  height: 55px;
+}
+
+form button {
+  font-weight: 600;
+}
+
+/* ================= FOOTER ================= */
+
+footer a {
+  transition: 0.3s;
+}
+
+footer a:hover {
+  color: #ffc107 !important;
+}
+
+footer ul li {
+  margin-bottom: 10px;
+}
