@@ -8,6 +8,7 @@ const indexRouter = require("./routes/index");
 const loginRouter = require("./routes/login");
 const registerRouter = require("./routes/register");
 const dashboardRouter = require("./routes/dashboard");
+const shopRouter = require("./routes/shop");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -21,6 +22,7 @@ app.use("/", indexRouter);
 app.use("/login", loginRouter);
 app.use("/register", registerRouter);
 app.use("/me", dashboardRouter);
+app.use("/shop", shopRouter);
 
 // ทํางานทุก request ที่เข้ามา
 app.use(function (req, res, next) {
@@ -42,3 +44,6 @@ app.use(function (err, req, res, next) {
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
+// ดึงไฟล์ routes/shop.js เข้ามา
+  
+
