@@ -159,3 +159,122 @@ footer a:hover {
 footer ul li {
   margin-bottom: 10px;
 }
+.nav-link {
+  transition: 0.25s;
+}
+
+.nav-link:hover {
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  border-bottom: 2px solid #000;
+}
+/* ===== Active Menu ===== */
+
+.navbar .nav-link {
+  padding: 18px 22px;
+
+  color: #333;
+
+  font-weight: 500;
+
+  transition: 0.3s;
+}
+
+.navbar .nav-link:hover {
+  background: #f3f3f3;
+
+  color: black;
+}
+
+.active-menu {
+  background: #eeeeee;
+
+  color: black !important;
+
+  font-weight: 700;
+}
+/*================ NAVBAR =================*/
+
+.navbar {
+  padding: 12px 0;
+}
+
+/* Menu */
+
+.navbar .nav-link {
+  color: #333;
+
+  font-size: 18px;
+
+  padding: 16px 22px;
+
+  transition: 0.3s;
+}
+
+/* Hover */
+
+.navbar .nav-link:hover {
+  background: #f3f3f3;
+
+  color: #000;
+}
+
+/* Active */
+
+.active-menu {
+  background: #ececec;
+
+  color: #000 !important;
+
+  font-weight: 700;
+}
+
+/* Logo */
+
+.navbar-brand img {
+  transition: 0.3s;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.05);
+}
+
+/* Search */
+
+.input-group {
+  border-radius: 50px;
+
+  overflow: hidden;
+}
+
+.input-group-text {
+  border-radius: 50px 0 0 50px;
+}
+
+.form-control {
+  border-radius: 0 50px 50px 0;
+
+  box-shadow: none !important;
+}
+
+/* Icons */
+
+.icon-btn {
+  font-size: 22px;
+}
+
+.icon-btn:hover {
+  color: black;
+}
+
+/* Login */
+
+.btn-dark {
+  border-radius: 30px;
+
+  padding: 10px 28px;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html>
+  <?- include('../partials/head') -?>
+
+  <body>
+    <?- include('../partials/header') -?> <?- include('../partials/nav') -?>
+
+    <!-- ================= BRAND MENU ================= -->
+
+    <section class="bg-white border-bottom">
+      <div class="container">
+        <div class="d-flex justify-content-center flex-wrap py-2 gap-5">
+          <a href="/shop" class="text-dark text-decoration-none fw-semibold">
+            All
+          </a>
+
+          <a href="/shop?brand=nike" class="text-dark text-decoration-none">
+            Nike
+          </a>
+
+          <a href="/shop?brand=adidas" class="text-dark text-decoration-none">
+            Adidas
+          </a>
+
+          <a href="/shop?brand=jordan" class="text-dark text-decoration-none">
+            Jordan
+          </a>
+
+          <a
+            href="/shop?brand=newbalance"
+            class="text-dark text-decoration-none"
+          >
+            New Balance
+          </a>
+
+          <a href="/shop?brand=converse" class="text-dark text-decoration-none">
+            Converse
+          </a>
+
+          <a href="/shop?brand=puma" class="text-dark text-decoration-none">
+            Puma
+          </a>
+
+          <a href="/shop?brand=asics" class="text-dark text-decoration-none">
+            ASICS
+          </a>
+
+          <a href="/shop?brand=vans" class="text-dark text-decoration-none">
+            Vans
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FILTER BAR ================= -->
+
+    <section class="py-4">
+      <div class="container">
+        <div class="row g-3">
+          <div class="col-lg">
+            <select class="form-select">
+              <option>Brand</option>
+
+              <option>Nike</option>
+
+              <option>Adidas</option>
+
+              <option>Jordan</option>
+
+              <option>New Balance</option>
+            </select>
+          </div>
+
+          <div class="col-lg">
+            <select class="form-select">
+              <option>Size</option>
+
+              <option>39</option>
+
+              <option>40</option>
+
+              <option>41</option>
+
+              <option>42</option>
+
+              <option>43</option>
+            </select>
+          </div>
+
+          <div class="col-lg">
+            <select class="form-select">
+              <option>Condition</option>
+
+              <option>90%</option>
+
+              <option>95%</option>
+
+              <option>99%</option>
+            </select>
+          </div>
+
+          <div class="col-lg">
+            <select class="form-select">
+              <option>Price</option>
+
+              <option>ต่ำกว่า 3,000</option>
+
+              <option>3,000 - 5,000</option>
+
+              <option>มากกว่า 5,000</option>
+            </select>
+          </div>
+
+          <div class="col-lg">
+            <select class="form-select">
+              <option>Sort By</option>
+
+              <option>Newest</option>
+
+              <option>Lowest Price</option>
+
+              <option>Highest Price</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
