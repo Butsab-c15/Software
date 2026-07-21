@@ -44,3 +44,6 @@ app.use(function (err, req, res, next) {
 app.listen(port, function () {
   console.log(`Example app listening on port ${port}!`);
 });
+// ดึงไฟล์ routes/shop.js เข้ามา
+  
+

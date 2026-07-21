@@ -48,6 +48,66 @@
           <a href="/shop?brand=vans" class="text-dark text-decoration-none">
             Vans
           </a>
+  <!-- 1. นำเข้าไฟล์ที่มีลิงก์ Bootstrap และ CSS ต่างๆ -->
+  <?- include('../partials/head') -?>
+  
+  <body class="bg-light">
+    <!-- นำเข้า Navbar ด้านบน -->
+    <?- include('../partials/header') -?> 
+    <?- include('../partials/nav') -?>
+
+    <section class="py-5">
+      <div class="container">
+        <!-- แสดงชื่อแบรนด์ที่กำลังเลือก -->
+        <div class="mb-4">
+          <h2 class="fw-bold">🛒 Shop: <?- currentBrand ? currentBrand.toUpperCase() : 'ALL BRANDS' -?></h2>
+        </div>
+
+        <div class="row g-4">
+          <!-- 2. วนลูปสร้างการ์ดสินค้า โดยใช้โครงสร้างคลาส Bootstrap -->
+          <? shoes.forEach(function(product) { ?>
+            <div class="col-lg-3 col-md-6">
+              <div class="card h-100 shadow-sm border-0 rounded-4">
+                
+                <!-- รูปภาพสินค้า -->
+                <img 
+                  src="<?- product.image -?>" 
+                  class="card-img-top p-3" 
+                  style="height: 250px; object-fit: contain;"
+                  alt="<?- product.name -?>" 
+                />
+                
+                <div class="card-body">
+                  <!-- Badge สภาพ (ใส่ค่าตัวอย่างไว้ก่อน) -->
+                  <span class="badge bg-warning text-dark mb-2"> 98% Condition </span>
+                  
+                  <!-- ชื่อสินค้า -->
+                  <h5 class="fw-bold"><?- product.name -?></h5>
+                  
+                  <!-- ไซส์ (ใส่ค่าตัวอย่างไว้ก่อน) -->
+                  <p class="text-muted">Size 42</p>
+                  
+                  <!-- ราคา -->
+                  <h4 class="fw-bold text-dark">฿<?- product.price -?></h4>
+                </div>
+                
+                <!-- ปุ่ม View Details -->
+                <div class="card-footer bg-white border-0 pb-4">
+                  <a href="#" class="btn btn-dark w-100 rounded-pill">
+                    View Details
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          <? }) ?>
+
+          <!-- 3. กรณีไม่มีสินค้าในแบรนด์นั้นเลย -->
+          <? if(shoes.length === 0) { ?>
+            <div class="col-12 text-center text-muted py-5">
+              <h4>ยังไม่มีสินค้าในหมวดหมู่นี้</h4>
+            </div>
+          <? } ?>
         </div>
       </div>
     </section>
@@ -125,5 +185,9 @@
         </div>
       </div>
     </section>
+  </body>
+</html>
+    <!-- นำเข้า Footer ด้านล่าง -->
+    <?- include('../partials/footer') -?>
   </body>
 </html>
