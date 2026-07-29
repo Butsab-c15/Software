@@ -11,6 +11,7 @@ router.get("/", function (req, res) {
   };
 
   res.render("pages/shop");
+});
 // 👟 สร้างข้อมูลจำลอง (Mock Data) ของรองเท้าเอาไว้ทดสอบก่อน
 const mockShoes = [
   {
