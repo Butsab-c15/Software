@@ -1,88 +1,33 @@
 <!doctype html>
-<html>
-  <?- include('../partials/head') -?>
-
-  <body>
-    <?- include('../partials/header') -?> <?- include('../partials/nav') -?>
+<html lang="en">
+  <?- include('../partials/head') ?>
+  <body class="bg-light">
+    <?- include('../partials/header') ?> 
+    <?- include('../partials/nav') ?>
 
     <!-- ================= BRAND MENU ================= -->
-
     <section class="bg-white border-bottom">
       <div class="container">
         <div class="d-flex justify-content-center flex-wrap py-3 gap-4">
-          <a
-            href="/shop"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'all' ? 'active' : '' %>"
-          >
-            All
-          </a>
-
-          <a
-            href="/shop?brand=nike"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'nike' ? 'active' : '' %>"
-          >
-            Nike
-          </a>
-
-          <a
-            href="/shop?brand=adidas"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'adidas' ? 'active' : '' %>"
-          >
-            Adidas
-          </a>
-
-          <a
-            href="/shop?brand=jordan"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'jordan' ? 'active' : '' %>"
-          >
-            Jordan
-          </a>
-
-          <a
-            href="/shop?brand=newbalance"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'newbalance' ? 'active' : '' %>"
-          >
-            New Balance
-          </a>
-
-          <a
-            href="/shop?brand=converse"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'converse' ? 'active' : '' %>"
-          >
-            Converse
-          </a>
-
-          <a
-            href="/shop?brand=puma"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'puma' ? 'active' : '' %>"
-          >
-            Puma
-          </a>
-
-          <a
-            href="/shop?brand=asics"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'asics' ? 'active' : '' %>"
-          >
-            ASICS
-          </a>
-
-          <a
-            href="/shop?brand=vans"
-            class="brand-link <%= selectedBrand.toLowerCase() === 'vans' ? 'active' : '' %>"
-          >
-            Vans
-          </a>
+          <a href="/shop" class="brand-link <?= selectedBrand.toLowerCase() === 'all' ? 'active' : '' ?>">All</a>
+          <a href="/shop?brand=nike" class="brand-link <?= selectedBrand.toLowerCase() === 'nike' ? 'active' : '' ?>">Nike</a>
+          <a href="/shop?brand=adidas" class="brand-link <?= selectedBrand.toLowerCase() === 'adidas' ? 'active' : '' ?>">Adidas</a>
+          <a href="/shop?brand=jordan" class="brand-link <?= selectedBrand.toLowerCase() === 'jordan' ? 'active' : '' ?>">Jordan</a>
+          <a href="/shop?brand=newbalance" class="brand-link <?= selectedBrand.toLowerCase() === 'newbalance' ? 'active' : '' ?>">New Balance</a>
+          <a href="/shop?brand=converse" class="brand-link <?= selectedBrand.toLowerCase() === 'converse' ? 'active' : '' ?>">Converse</a>
+          <a href="/shop?brand=puma" class="brand-link <?= selectedBrand.toLowerCase() === 'puma' ? 'active' : '' ?>">Puma</a>
+          <a href="/shop?brand=asics" class="brand-link <?= selectedBrand.toLowerCase() === 'asics' ? 'active' : '' ?>">ASICS</a>
+          <a href="/shop?brand=vans" class="brand-link <?= selectedBrand.toLowerCase() === 'vans' ? 'active' : '' ?>">Vans</a>
         </div>
       </div>
     </section>
 
     <!-- ================= FILTER BAR ================= -->
-
-    <section class="py-4">
+    <section class="py-4 bg-light">
       <div class="container">
         <div class="row g-3">
           <div class="col-lg">
-            <select class="form-select">
+            <select class="form-select bg-white border-0 shadow-sm">
               <option>Brand</option>
               <option>Nike</option>
               <option>Adidas</option>
@@ -90,9 +35,8 @@
               <option>New Balance</option>
             </select>
           </div>
-
           <div class="col-lg">
-            <select class="form-select">
+            <select class="form-select bg-white border-0 shadow-sm">
               <option>Size</option>
               <option>39</option>
               <option>40</option>
@@ -101,27 +45,24 @@
               <option>43</option>
             </select>
           </div>
-
           <div class="col-lg">
-            <select class="form-select">
+            <select class="form-select bg-white border-0 shadow-sm">
               <option>Condition</option>
               <option>90%</option>
               <option>95%</option>
               <option>99%</option>
             </select>
           </div>
-
           <div class="col-lg">
-            <select class="form-select">
+            <select class="form-select bg-white border-0 shadow-sm">
               <option>Price</option>
               <option>ต่ำกว่า 3,000</option>
               <option>3,000 - 5,000</option>
               <option>มากกว่า 5,000</option>
             </select>
           </div>
-
           <div class="col-lg">
-            <select class="form-select">
+            <select class="form-select bg-white border-0 shadow-sm">
               <option>Sort By</option>
               <option>Newest</option>
               <option>Lowest Price</option>
@@ -132,26 +73,74 @@
       </div>
     </section>
 
+    <!-- ================= PRODUCT GRID ================= -->
+    <section class="pb-5 bg-light">
+      <div class="container">
+        <div class="row g-4">
+          
+          <!-- ตรวจสอบว่ามีข้อมูลส่งมาจาก Backend หรือไม่ -->
+          <? if (typeof products !== 'undefined' && products.length > 0) { ?>
+            
+            <? products.forEach(function(product) { ?>
+              <div class="col-lg-3 col-md-6">
+                <!-- การ์ดสินค้าแบบในรูปเป๊ะๆ -->
+                <div class="card h-100 shadow-sm border-0 rounded-4 p-3 d-flex flex-column">
+                  
+                  <!-- ส่วนรูปภาพ -->
+                  <div class="rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f4f4f4;">
+                    <img src="<?= product.image ?>" alt="<?= product.name ?>" style="max-height: 180px; max-width: 100%; object-fit: contain;" />
+                  </div>
+
+                  <!-- ส่วนเนื้อหา -->
+                  <div class="card-body p-0 d-flex flex-column flex-grow-1">
+                    <div>
+                      <span class="badge <?= product.badgeColor ?> mb-2"><?= product.condition ?>% Condition</span>
+                    </div>
+                    
+                    <h5 class="fw-bold text-dark"><?= product.name ?></h5>
+                    <p class="text-secondary mb-3"><small>Size <?= product.size ?></small></p>
+                    
+                    <h4 class="fw-bold text-dark mb-4">฿<?= product.price.toLocaleString() ?></h4>
+                    
+                    <a href="/product/<?= product.id ?>" class="btn btn-dark w-100 rounded-pill mt-auto">
+                      View Details
+                    </a>
+                  </div>
+                </div>
+              </div>
+            <? }); ?>
+
+          <? } else { ?>
+            <div class="col-12 text-center py-5">
+              <h4 class="text-muted">No products found for this brand.</h4>
+              <a href="/shop" class="btn btn-outline-dark rounded-pill mt-3">View All Brands</a>
+            </div>
+          <? } ?>
+
+        </div>
+      </div>
+    </section>
+
     <!-- ================= CSS ของ Brand ================= -->
     <style>
       .brand-link {
-        color: #5e5959;
+        color: #8c8c8c;
         text-decoration: none;
         font-weight: 500;
         transition: 0.2s;
+        font-size: 1.1rem;
       }
-
       .brand-link:hover {
         color: #333;
       }
-
       .brand-link.active {
-        color: #111;
-        font-weight: 600;
+        color: #000;
+        font-weight: 700;
+        border-bottom: 2px solid #000;
+        padding-bottom: 2px;
       }
     </style>
 
-    <!-- นำเข้า Footer ด้านล่าง -->
-    <?- include('../partials/footer') -?>
+    <?- include('../partials/footer') ?>
   </body>
 </html>
