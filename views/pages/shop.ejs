@@ -9,105 +9,69 @@
 
     <section class="bg-white border-bottom">
       <div class="container">
-        <div class="d-flex justify-content-center flex-wrap py-2 gap-5">
-          <a href="/shop" class="text-dark text-decoration-none fw-semibold">
+        <div class="d-flex justify-content-center flex-wrap py-3 gap-4">
+          <a
+            href="/shop"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'all' ? 'active' : '' %>"
+          >
             All
           </a>
 
-          <a href="/shop?brand=nike" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=nike"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'nike' ? 'active' : '' %>"
+          >
             Nike
           </a>
 
-          <a href="/shop?brand=adidas" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=adidas"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'adidas' ? 'active' : '' %>"
+          >
             Adidas
           </a>
 
-          <a href="/shop?brand=jordan" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=jordan"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'jordan' ? 'active' : '' %>"
+          >
             Jordan
           </a>
 
           <a
             href="/shop?brand=newbalance"
-            class="text-dark text-decoration-none"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'newbalance' ? 'active' : '' %>"
           >
             New Balance
           </a>
 
-          <a href="/shop?brand=converse" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=converse"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'converse' ? 'active' : '' %>"
+          >
             Converse
           </a>
 
-          <a href="/shop?brand=puma" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=puma"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'puma' ? 'active' : '' %>"
+          >
             Puma
           </a>
 
-          <a href="/shop?brand=asics" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=asics"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'asics' ? 'active' : '' %>"
+          >
             ASICS
           </a>
 
-          <a href="/shop?brand=vans" class="text-dark text-decoration-none">
+          <a
+            href="/shop?brand=vans"
+            class="brand-link <%= selectedBrand.toLowerCase() === 'vans' ? 'active' : '' %>"
+          >
             Vans
           </a>
-  <!-- 1. นำเข้าไฟล์ที่มีลิงก์ Bootstrap และ CSS ต่างๆ -->
-  <?- include('../partials/head') -?>
-  
-  <body class="bg-light">
-    <!-- นำเข้า Navbar ด้านบน -->
-    <?- include('../partials/header') -?> 
-    <?- include('../partials/nav') -?>
-
-    <section class="py-5">
-      <div class="container">
-        <!-- แสดงชื่อแบรนด์ที่กำลังเลือก -->
-        <div class="mb-4">
-          <h2 class="fw-bold">🛒 Shop: <?- currentBrand ? currentBrand.toUpperCase() : 'ALL BRANDS' -?></h2>
-        </div>
-
-        <div class="row g-4">
-          <!-- 2. วนลูปสร้างการ์ดสินค้า โดยใช้โครงสร้างคลาส Bootstrap -->
-          <? shoes.forEach(function(product) { ?>
-            <div class="col-lg-3 col-md-6">
-              <div class="card h-100 shadow-sm border-0 rounded-4">
-                
-                <!-- รูปภาพสินค้า -->
-                <img 
-                  src="<?- product.image -?>" 
-                  class="card-img-top p-3" 
-                  style="height: 250px; object-fit: contain;"
-                  alt="<?- product.name -?>" 
-                />
-                
-                <div class="card-body">
-                  <!-- Badge สภาพ (ใส่ค่าตัวอย่างไว้ก่อน) -->
-                  <span class="badge bg-warning text-dark mb-2"> 98% Condition </span>
-                  
-                  <!-- ชื่อสินค้า -->
-                  <h5 class="fw-bold"><?- product.name -?></h5>
-                  
-                  <!-- ไซส์ (ใส่ค่าตัวอย่างไว้ก่อน) -->
-                  <p class="text-muted">Size 42</p>
-                  
-                  <!-- ราคา -->
-                  <h4 class="fw-bold text-dark">฿<?- product.price -?></h4>
-                </div>
-                
-                <!-- ปุ่ม View Details -->
-                <div class="card-footer bg-white border-0 pb-4">
-                  <a href="#" class="btn btn-dark w-100 rounded-pill">
-                    View Details
-                  </a>
-                </div>
-
-              </div>
-            </div>
-          <? }) ?>
-
-          <!-- 3. กรณีไม่มีสินค้าในแบรนด์นั้นเลย -->
-          <? if(shoes.length === 0) { ?>
-            <div class="col-12 text-center text-muted py-5">
-              <h4>ยังไม่มีสินค้าในหมวดหมู่นี้</h4>
-            </div>
-          <? } ?>
         </div>
       </div>
     </section>
@@ -120,13 +84,9 @@
           <div class="col-lg">
             <select class="form-select">
               <option>Brand</option>
-
               <option>Nike</option>
-
               <option>Adidas</option>
-
               <option>Jordan</option>
-
               <option>New Balance</option>
             </select>
           </div>
@@ -134,15 +94,10 @@
           <div class="col-lg">
             <select class="form-select">
               <option>Size</option>
-
               <option>39</option>
-
               <option>40</option>
-
               <option>41</option>
-
               <option>42</option>
-
               <option>43</option>
             </select>
           </div>
@@ -150,11 +105,8 @@
           <div class="col-lg">
             <select class="form-select">
               <option>Condition</option>
-
               <option>90%</option>
-
               <option>95%</option>
-
               <option>99%</option>
             </select>
           </div>
@@ -162,11 +114,8 @@
           <div class="col-lg">
             <select class="form-select">
               <option>Price</option>
-
               <option>ต่ำกว่า 3,000</option>
-
               <option>3,000 - 5,000</option>
-
               <option>มากกว่า 5,000</option>
             </select>
           </div>
@@ -174,19 +123,34 @@
           <div class="col-lg">
             <select class="form-select">
               <option>Sort By</option>
-
               <option>Newest</option>
-
               <option>Lowest Price</option>
-
               <option>Highest Price</option>
             </select>
           </div>
         </div>
       </div>
     </section>
-  </body>
-</html>
+
+    <!-- ================= CSS ของ Brand ================= -->
+    <style>
+      .brand-link {
+        color: #5e5959;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.2s;
+      }
+
+      .brand-link:hover {
+        color: #333;
+      }
+
+      .brand-link.active {
+        color: #111;
+        font-weight: 600;
+      }
+    </style>
+
     <!-- นำเข้า Footer ด้านล่าง -->
     <?- include('../partials/footer') -?>
   </body>
