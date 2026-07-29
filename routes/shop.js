@@ -1,16 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", function (req, res) {
-  // ดึงค่า brand จาก URL query (ถ้าไม่มีให้ค่าเริ่มต้นเป็น 'all')
-  const currentBrand = req.query.brand || "all";
-
-  res.locals.pageData = {
-    title: "Shop",
-    currentBrand: currentBrand, // เพิ่มค่านี้เข้าไป
-  };
-
-  res.render("pages/shop");
 // 👟 สร้างข้อมูลจำลอง (Mock Data) ของรองเท้าเอาไว้ทดสอบก่อน
 const mockShoes = [
   {
@@ -56,28 +46,30 @@ const mockShoes = [
 
 router.get("/", async (req, res) => {
   try {
-    // 1. รับค่าแบรนด์จาก URL (เช่น ?brand=nike)
-    const selectedBrand = req.query.brand;
+    // 1. รับค่าแบรนด์จาก URL (ถ้าไม่มีให้ค่าเริ่มต้นเป็น 'all')
+    const selectedBrand = req.query.brand || "all";
 
     let shoesData;
 
     // 2. เช็คว่ามีการเลือกแบรนด์มาหรือไม่
-    if (selectedBrand) {
+    if (selectedBrand && selectedBrand !== "all") {
       // ใช้คำสั่ง .filter() เพื่อกรองเอาเฉพาะรองเท้าที่ brand ตรงกับที่กดมา
       shoesData = mockShoes.filter(
         (shoe) => shoe.brand === selectedBrand.toLowerCase(),
       );
     } else {
-      // ถ้าไม่มีการระบุแบรนด์ (เข้ามาหน้า shop ตรงๆ) ให้แสดงทั้งหมด
+      // ถ้าไม่มีการระบุแบรนด์ หรือเป็น 'all' ให้แสดงทั้งหมด
       shoesData = mockShoes;
     }
 
     // 3. ส่งข้อมูลไปที่ views/pages/shop.ejs
-    // 3. ส่งข้อมูลไปที่ views/pages/shop.ejs
     res.render("pages/shop", {
       shoes: shoesData,
       currentBrand: selectedBrand,
-      pageData: { title: "Shop - Sneaker2Hand" }, 
+      pageData: {
+        title: "Shop - EGO",
+        currentBrand: selectedBrand,
+      },
     });
   } catch (error) {
     console.error(error);
