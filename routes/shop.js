@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// 👟 สร้างข้อมูลจำลอง (Mock Data) ของรองเท้าเอาไว้ทดสอบก่อน
-// เพิ่มข้อมูล size, condition, และ badgeColor เพื่อให้หน้า EJS แสดงผลได้สมบูรณ์
+// ข้อมูลจำลอง (Mock Data)
 const mockShoes = [
   {
     id: 1,
@@ -58,7 +57,6 @@ const mockShoes = [
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96QL0YydnLkom1gpJHhHsgomVJgDUqPO3PwU1h6tR3LgNtZCA5I2XQDA&s=10",
   },
-
   {
     id: 6,
     brand: "converse",
@@ -381,30 +379,49 @@ const mockShoes = [
   },
 ];
 
-// รวม router.get("/") ให้เหลือแค่ตัวเดียว
+// หน้าแสดงรายการสินค้า (Shop)
 router.get("/", async (req, res) => {
   try {
-    // 1. รับค่าแบรนด์จาก URL (เช่น ?brand=nike) ถ้าไม่มีให้เป็น "all"
     const currentBrand = req.query.brand || "all";
-
     let shoesData;
 
-    // 2. เช็คว่ามีการเลือกแบรนด์มาหรือไม่
     if (currentBrand !== "all") {
-      // กรองเอาเฉพาะรองเท้าที่ brand ตรงกับที่กดมา
       shoesData = mockShoes.filter(
         (shoe) => shoe.brand === currentBrand.toLowerCase(),
       );
     } else {
-      // ถ้าไม่มีการระบุแบรนด์ ให้แสดงทั้งหมด
       shoesData = mockShoes;
     }
 
-    // 3. ส่งข้อมูลไปที่ views/pages/shop.ejs
     res.render("pages/shop", {
-      products: shoesData, // ตั้งชื่อว่า products เพื่อให้ตรงกับตัวแปรที่หน้า EJS วนลูป
-      selectedBrand: currentBrand, // ส่ง selectedBrand ไปทำไฮไลท์เมนูด้านบน
+      products: shoesData,
+      selectedBrand: currentBrand,
       pageData: { title: "Shop - Sneaker2Hand" },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error");
+  }
+});
+
+// หน้าแสดงรายละเอียดสินค้า (Product Detail)
+router.get("/product/:id", (req, res) => {
+  try {
+    // รับ ID จาก URL และแปลงเป็นตัวเลข
+    const productId = parseInt(req.params.id);
+
+    // ค้นหาสินค้าจาก mockShoes
+    const product = mockShoes.find((shoe) => shoe.id === productId);
+
+    // ถ้าไม่เจอสินค้า ให้ส่งกลับ 404
+    if (!product) {
+      return res.status(404).send("Product not found");
+    }
+
+    // ส่งข้อมูลไปเรนเดอร์ที่หน้า product.ejs
+    res.render("pages/product", {
+      product: product,
+      pageData: { title: `${product.name} - Sneaker2Hand` },
     });
   } catch (error) {
     console.error(error);
