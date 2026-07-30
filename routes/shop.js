@@ -386,23 +386,26 @@ router.get("/", async (req, res) => {
     let shoesData;
 
     if (currentBrand !== "all") {
-      shoesData = mockShoes.filter(
-        (shoe) => shoe.brand === currentBrand.toLowerCase(),
+      // ค้นหาแบบยืดหยุ่น พิมพ์บางส่วนก็เจอ
+      shoesData = mockShoes.filter((shoe) =>
+        shoe.brand.toLowerCase().includes(currentBrand.toLowerCase())
       );
     } else {
       shoesData = mockShoes;
     }
 
+    // อย่าลืมเช็กดูว่าโค้ด res.render ของเดิมของคุณหน้าตาแบบนี้ไหม
+    // ต้องมีปีกกาปิด } ของ try และ ) ของ router.get ให้ครบแบบด้านล่างนี้ครับ
     res.render("pages/shop", {
       products: shoesData,
-      selectedBrand: currentBrand,
-      pageData: { title: "Shop - Sneaker2Hand" },
+      pageData: { title: "Shop - Sneaker2Hand", active: "shop" },
     });
+
   } catch (error) {
     console.error(error);
     res.status(500).send("Server Error");
   }
-});
+}); // ปีกกาปิดของ router.get
 
 // หน้าแสดงรายละเอียดสินค้า (Product Detail)
 router.get("/product/:id", (req, res) => {
