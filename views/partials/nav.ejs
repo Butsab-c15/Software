@@ -1,9 +1,14 @@
-<nav class="navbar navbar-expand-lg bg-white shadow-sm">
-  <div class="container">
+<!-- แถวบน: Navbar -->
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-0"
+  style="height: 60px"
+>
+  <div
+    class="container-fluid d-flex align-items-center justify-content-between h-100 px-5"
+  >
     <!-- Logo -->
-
     <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="/images/imageslogo.png" alt="EGO Logo" height="65" class="me" />
+      <img src="/images/imageslogo.png" alt="EGO Logo" height="50" class="me" />
     </a>
 
     <!-- ปุ่มสำหรับมือถือ -->
@@ -18,59 +23,62 @@
 
     <div class="collapse navbar-collapse" id="navbarMenu">
       <!-- เมนูซ้าย -->
-      <ul class="navbar-nav ms-3">
-        <li class="nav-item">
-          <a
-            class="nav-link <%= pageData.active === 'home' ? 'active-menu' : '' %>"
-            href="/"
-          >
-            Home
-          </a>
-        </li>
+      <ul class="navbar-nav ms-1" style="gap: 1px;">
+  <li class="nav-item">
+    <a class="nav-link <%= pageData.active === 'home' ? 'active-menu' : '' %>" 
+       href="/" 
+       style="padding: 4px 10px !important; margin: 0 !important;">
+      Home
+    </a>
+  </li>
 
-        <li class="nav-item">
-          <a
-            class="nav-link <%= pageData.active === 'shop' ? 'active-menu' : '' %>"
-            href="/shop"
-          >
-            Shop
-          </a>
-        </li>
-      </ul>
+  <li class="nav-item">
+    <a class="nav-link <%= pageData.active === 'shop' ? 'active-menu' : '' %>" 
+       href="/shop" 
+       style="padding: 4px 10px !important; margin: 0 !important;">
+      Shop
+    </a>
+  </li>
+</ul>
+
 
       <!-- Search -->
-      <form class="d-flex mx-auto" style="width: 500px">
-        <div class="input-group">
-          <span class="input-group-text bg-white border-end-0">
-            <i class="bi bi-search"></i>
+      <form class="d-flex mx-auto search-box w-100" style="max-width: 500px">
+        <div class="col-11 h-100 d-flex align-items-center justify-content-center">
+        <div class="input-group bg-light rounded-1" style="background-color: #434242; height: 36px; width: 100%; max-width: 500px;">
+          <!-- ไอคอนแว่นขยาย -->
+          <span class="input-group-text bg-transparent border-0 pe-2 text-muted d-flex align-items-center">
+            <i class="bi bi-search" style="font-size: 0.85rem;"></i>
           </span>
-
-          <input
-            class="form-control border-start-0"
-            type="search"
-            placeholder="Search for brand"
-          />
+          <input class="form-control bg-transparent border-0 ps-1 h-100" type="search" placeholder="Search for brand" style="box-shadow: none; font-size: 0.85rem;" />
         </div>
-      </form>
+      </div>
 
-      <!-- เมนูขวา -->
-      <ul class="navbar-nav align-items-center">
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="bi bi-heart fs-5"></i>
+      </form>     
+     
+
+      <!-- เมนูขวา --> 
+       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-0" style="height: 60px;">
+        <div class="d-flex align-items-center gap-4 h-100">
+  
+      <!-- ไอคอน Heart (ลบ padding ออกเพื่อให้ขนานแนวดิ่งพอดี) -->
+          <a class="text-dark p-0 d-flex align-items-center text-decoration-none" href="#">
+            <i class="bi bi-heart" style="font-size: 1.15rem;"></i>
           </a>
-        </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="#">
-            <i class="bi bi-bag fs-5"></i>
+      <!-- ไอคอน Bag -->
+          <a class="text-dark p-0 d-flex align-items-center text-decoration-none" href="#">
+            <i class="bi bi-bag" style="font-size: 1.15rem;"></i>
           </a>
-        </li>
 
-        <li class="nav-item">
-          <a class="btn btn-dark ms-2" href="/login"> Login </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+      <!-- ปุ่ม Login ทรงเหลี่ยมมนเล็กน้อย (คุมความสูง 36px ให้สูงเท่ากับช่อง Search) -->
+          <a class="btn btn-dark rounded-1 px-3 d-flex align-items-center justify-content-center text-decoration-none" 
+             href="/login" 
+            style="font-size: 0.85rem; height: 36px; font-weight: 500;">
+              Login
+          </a>
+          
+        </div>
+        
+</div>
 </nav>

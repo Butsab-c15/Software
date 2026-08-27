@@ -1,5 +1,5 @@
 body {
-  background: #f8f9fa;
+  background: #FFFFFF;
   font-family: "Segoe UI", sans-serif;
 }
 
@@ -9,22 +9,36 @@ body {
   padding: 8px 0;
 }
 
-.navbar-brand {
-  font-size: 32px;
-
-  font-weight: bold;
+.logo {
+  height: 45px;
 }
 
 .nav-link {
-  margin: 0 12px;
+  margin: 0 10px;
+  font-weight: 430;
+  color: #565656 !important;
+}
 
-  font-weight: 500;
+.nav-link:hover {
+  color: #0f0e0e !important;
 }
 
 .search-box {
-  width: 430px;
+  width: 400px;
 }
 
+.input-group {
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.form-control {
+  box-shadow: none;
+}
+
+.input-group-text {
+  background: #fff;
+}
 /* ---------- Hero ---------- */
 
 .banner-img {
@@ -301,3 +315,9 @@ footer ul li {
 
   padding-bottom: 5px;
 }
+
+/* บังคับให้แสดงพื้นที่แถบเลื่อนแนวตั้งเสมอ เพื่อไม่ให้หน้าเว็บเขยิบ */
+html {
+  overflow-y: scroll;
+}
+
