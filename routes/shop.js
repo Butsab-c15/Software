@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
 
-// 👟 สร้างข้อมูลจำลอง (Mock Data) ของรองเท้าเอาไว้ทดสอบก่อน
+// ข้อมูลจำลอง (Mock Data)เป็นDatabeaseได้มั้ย
 const mockShoes = [
   {
     id: 1,
     brand: "nike",
     name: "Nike Air Force 1",
     price: "3,500",
+    size: 42,
+    condition: 95,
+    badgeColor: "bg-success",
     image:
       "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=500&q=80",
   },
@@ -16,6 +19,9 @@ const mockShoes = [
     brand: "nike",
     name: "Nike Dunk Low",
     price: "3,200",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-secondary",
     image: "https://i.ebayimg.com/images/g/E6UAAOSwHehntlHs/s-l1600.webp",
   },
   {
@@ -23,6 +29,9 @@ const mockShoes = [
     brand: "adidas",
     name: "Adidas Samba",
     price: "2,700",
+    size: 40,
+    condition: 98,
+    badgeColor: "bg-warning text-dark",
     image:
       "https://assets.adidas.com/images/w_500,f_auto,q_auto/3a4ab3dac9c1429389cd77e280f3c8e4_9366/adidas_Originals_x_Liberty_London_Samba_OG_IH9056_01_00_standard.jpg",
   },
@@ -31,6 +40,9 @@ const mockShoes = [
     brand: "jordan",
     name: "Air Jordan 1",
     price: "4,800",
+    size: 43,
+    condition: 99,
+    badgeColor: "bg-danger",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRABgPAMoO5u0Ra8nJDmA6g7ZRzxRI7I-AaGlcuGEqcMm4xbXofcspzwMdz&s=10",
   },
@@ -39,40 +51,588 @@ const mockShoes = [
     brand: "newbalance",
     name: "New Balance 530",
     price: "2,900",
+    size: 39,
+    condition: 95,
+    badgeColor: "bg-success",
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT96QL0YydnLkom1gpJHhHsgomVJgDUqPO3PwU1h6tR3LgNtZCA5I2XQDA&s=10",
   },
+  {
+    id: 6,
+    brand: "converse",
+    name: "Converse Wave Motion Trainer Leather",
+    price: "2,500",
+    size: 39,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Converse Wave Motion Trainer Leather.webp",
+  },
+  {
+    id: 7,
+    brand: "converse",
+    name: "Chuck Taylor All Star Malden Street Suede",
+    price: "2,300",
+    size: 39,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Chuck Taylor All Star Malden Street Suede.webp",
+  },
+  {
+    id: 8,
+    brand: "converse",
+    name: "Chuck 70 Canvas Wide",
+    price: "2,100",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Chuck 70 Canvas Wide.webp",
+  },
+  {
+    id: 9,
+    brand: "converse",
+    name: "Converse x Comme des Garçons PLAY Chuck 70.1",
+    price: "3,000",
+    size: 40,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/Converse x Comme des Garçons PLAY Chuck 70.1.webp",
+  },
+  {
+    id: 10,
+    brand: "converse",
+    name: "Converse x Comme des Garçons PLAY Chuck 70",
+    price: "2,700",
+    size: 42,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Converse x Comme des Garçons PLAY Chuck 70.webp",
+  },
+  {
+    id: 11,
+    brand: "converse",
+    name: "Converse x Comme des Garçons PLAY Chuck 70",
+    price: "2,700",
+    size: 42,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Converse x Comme des Garçons PLAY Chuck 70.webp",
+  },
+  {
+    id: 12,
+    brand: "newbalance",
+    name: "New Balance 9060 Sportstyle",
+    price: "1,900",
+    size: 42,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/New Balance 9060 Sportstyle.webp",
+  },
+  {
+    id: 13,
+    brand: "newbalance",
+    name: "New Balance 204L Sportstyle",
+    price: "2,100",
+    size: 40,
+    condition: 92,
+    badgeColor: "bg-success",
+    image: "/images/New Balance 204L Sportstyle.webp",
+  },
+  {
+    id: 14,
+    brand: "newbalance",
+    name: "New Balance 327 Sportstyle",
+    price: "2,100",
+    size: 38,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/New Balance 327 Sportstyle.webp",
+  },
+  {
+    id: 15,
+    brand: "newbalance",
+    name: "New Balance 2010 Lifestyle",
+    price: "2,500",
+    size: 39,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/New Balance 2010 Lifestyle.webp",
+  },
+  {
+    id: 16,
+    brand: "newbalance",
+    name: "New Balance 740",
+    price: "1,800",
+    size: 40,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/New Balance 740.webp",
+  },
+  {
+    id: 17,
+    brand: "puma",
+    name: "PUMA Palermo",
+    price: "1,800",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Palermo.avif",
+  },
+  {
+    id: 18,
+    brand: "puma",
+    name: "PUMA Palermo",
+    price: "2,000",
+    size: 40,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/Palermo (1).avif",
+  },
+  {
+    id: 19,
+    brand: "puma",
+    name: "PUMA Palermo",
+    price: "2,200",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Palermo(3).avif",
+  },
+  {
+    id: 20,
+    brand: "puma",
+    name: "Speedcat-Ballet",
+    price: "2,000",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าหนังกลับ-Speedcat-Ballet-สำหรับผู้หญิง (3).avif",
+  },
+  {
+    id: 21,
+    brand: "puma",
+    name: "Speedcat-Ballet",
+    price: "2,000",
+    size: 39,
+    condition: 92,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าหนังกลับ-Speedcat-Ballet-สำหรับผู้หญิง (2).avif",
+  },
+  {
+    id: 22,
+    brand: "puma",
+    name: "Speedcat-Ballet",
+    price: "1,900",
+    size: 39,
+    condition: 85,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าหนังกลับ-Speedcat-Ballet-สำหรับผู้หญิง (1).avif",
+  },
+  {
+    id: 23,
+    brand: "puma",
+    name: "Speedcat-Ballet",
+    price: "2,100",
+    size: 42,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าหนังกลับ-Speedcat-Ballet-สำหรับผู้หญิง.avif",
+  },
+  {
+    id: 24,
+    brand: "puma",
+    name: "Speedcat-OG",
+    price: "2,100",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าผ้าใบ-Speedcat-OG-สำหรับทุกเพศ (4).avif",
+  },
+  {
+    id: 25,
+    brand: "puma",
+    name: "Speedcat-OG",
+    price: "2,100",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าผ้าใบ-Speedcat-OG-สำหรับทุกเพศ (3).avif",
+  },
+  {
+    id: 26,
+    brand: "puma",
+    name: "Speedcat-OG",
+    price: "1,800",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าผ้าใบ-Speedcat-OG-สำหรับทุกเพศ (2).avif",
+  },
+  {
+    id: 27,
+    brand: "puma",
+    name: "Speedcat-OG",
+    price: "1,900",
+    size: 38,
+    condition: 85,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าผ้าใบ-Speedcat-OG-สำหรับทุกเพศ (1).avif",
+  },
+  {
+    id: 28,
+    brand: "puma",
+    name: "Speedcat-OG",
+    price: "2,100",
+    size: 39,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้าผ้าใบ-Speedcat-OG-สำหรับทุกเพศ.avif",
+  },
+  {
+    id: 29,
+    brand: "vans",
+    name: "Skip to the end of the images gallery",
+    price: "2,100",
+    size: 39,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Skip to the end of the images gallery.jpg",
+  },
+  {
+    id: 30,
+    brand: "vans",
+    name: "VANS PREMIUM SUPER LOWPRO TRAINER - PIG SUEDE BROWN",
+    price: "2,200",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/VANS PREMIUM SUPER LOWPRO TRAINER - PIG SUEDE BROWN.jpg",
+  },
+  {
+    id: 31,
+    brand: "vans",
+    name: "VANS OLD SKOOL",
+    price: "2,100",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/VANS OLD SKOOL.jpg",
+  },
+  {
+    id: 32,
+    brand: "vans",
+    name: "VANS CLASSIC SLIP-ON - GREEN WHITE",
+    price: "1,900",
+    size: 42,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/VANS CLASSIC SLIP-ON - GREEN WHITE.png",
+  },
+  {
+    id: 33,
+    brand: "asics",
+    name: "GEL-NIMBUS 10.1",
+    price: "2,300",
+    size: 42,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/GEL-NIMBUS 10.1.webp",
+  },
+  {
+    id: 34,
+    brand: "asics",
+    name: "GEL-KAYANO 20",
+    price: "2,500",
+    size: 42,
+    condition: 95,
+    badgeColor: "bg-success",
+    image: "/images/GEL-KAYANO 20.webp",
+  },
+  {
+    id: 35,
+    brand: "asics",
+    name: "GEL-1130",
+    price: "2,100",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/GEL-1130.jpg",
+  },
+  {
+    id: 36,
+    brand: "asics",
+    name: "GEL-NYC",
+    price: "2,000",
+    size: 38,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/GEL-NYC.webp",
+  },
+  {
+    id: 37,
+    brand: "asics",
+    name: "GT-2160",
+    price: "2,300",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/GT-2160.webp",
+  },
+  {
+    id: 38,
+    brand: "adidas",
+    name: "Superstar II",
+    price: "3,400",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Superstar II.avif",
+  },
+  {
+    id: 39,
+    brand: "adidas",
+    name: "Stan Smith",
+    price: "3,500",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Stan Smith.avif",
+  },
+  {
+    id: 40,
+    brand: "adidas",
+    name: "Samba OG",
+    price: "2,500",
+    size: 43,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Samba OG.avif",
+  },
+  {
+    id: 41,
+    brand: "adidas",
+    name: "ADISTAR CONTROL 5",
+    price: "2,400",
+    size: 43,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้า ADISTAR CONTROL 5.avif",
+  },
+  {
+    id: 42,
+    brand: "adidas",
+    name: "Adizero EVO SL",
+    price: "2,300",
+    size: 40,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/รองเท้า Adizero EVO SL.avif",
+  },
+  {
+    id: 43,
+    brand: "nike",
+    name: "Nike SB Dunk Low Pro",
+    price: "2,500",
+    size: 38,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Nike SB Dunk Low Pro.avif",
+  },
+  {
+    id: 44,
+    brand: "nike",
+    name: "Nike Dunk Low SE",
+    price: "3,000",
+    size: 39,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Nike Dunk Low SE.avif",
+  },
+  {
+    id: 45,
+    brand: "jordan",
+    name: "Jordan 1 Retro Low OG SP Fragment x Travis Scott",
+    price: "5,000",
+    size: 40,
+    condition: 99,
+    badgeColor: "bg-success",
+    image: "/images/Jordan 1 Retro Low OG SP Fragment x Travis Scott.webp",
+  },
+  {
+    id: 46,
+    brand: "jordan",
+    name: "Jordan 1 Retro Low OG SP Travis Scott Mocha",
+    price: "4,800",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "/images/Jordan 1 Retro Low OG SP Travis Scott Mocha.webp",
+  },
+  {
+    id: 47,
+    brand: "nike",
+    name: "Canvas and Parachute Beige",
+    price: "3,000",
+    size: 41,
+    condition: 90,
+    badgeColor: "bg-success",
+    image: "images/Canvas and Parachute Beige.avif",
+  },
 ];
 
+// หน้าแสดงรายการสินค้า (Shop)==> ของฉัน
 router.get("/", async (req, res) => {
   try {
-    // 1. รับค่าแบรนด์จาก URL (ถ้าไม่มีให้ค่าเริ่มต้นเป็น 'all')
-    const selectedBrand = req.query.brand || "all";
+    // =====================================================
+    // รับค่าจาก Filter
+    // รองรับทั้งค่าเดียว และหลายค่า
+    // =====================================================
 
-    let shoesData;
+    let currentSearch = req.query.q || "";
+    let currentBrand = req.query.brand || "all";
+    let currentSize = req.query.size || "all";
+    let currentCondition = req.query.condition || "all";
+    let currentPrice = req.query.price || "all";
 
-    // 2. เช็คว่ามีการเลือกแบรนด์มาหรือไม่
-    if (selectedBrand && selectedBrand !== "all") {
-      // ใช้คำสั่ง .filter() เพื่อกรองเอาเฉพาะรองเท้าที่ brand ตรงกับที่กดมา
-      shoesData = mockShoes.filter(
-        (shoe) => shoe.brand === selectedBrand.toLowerCase(),
+    // ทำให้ค่าที่รับมาเป็น Array เสมอ
+    const brands = Array.isArray(currentBrand) ? currentBrand : [currentBrand];
+
+    const sizes = Array.isArray(currentSize) ? currentSize : [currentSize];
+
+    const conditions = Array.isArray(currentCondition)
+      ? currentCondition
+      : [currentCondition];
+
+    const prices = Array.isArray(currentPrice) ? currentPrice : [currentPrice];
+
+    // =====================================================
+    // เริ่มต้นด้วยสินค้าทั้งหมด
+    // =====================================================
+
+    let shoesData = [...mockShoes];
+
+    // =====================================================
+    // SEARCH
+    // =====================================================
+
+    if (currentSearch.trim()) {
+      const keyword = currentSearch.trim().toLowerCase();
+
+      shoesData = shoesData.filter((shoe) =>
+        String(shoe.name || "")
+          .toLowerCase()
+          .includes(keyword),
       );
-    } else {
-      // ถ้าไม่มีการระบุแบรนด์ หรือเป็น 'all' ให้แสดงทั้งหมด
-      shoesData = mockShoes;
     }
 
-    // 3. ส่งข้อมูลไปที่ views/pages/shop.ejs
+    // =====================================================
+    // FILTER : BRAND
+    // =====================================================
+
+    if (!brands.includes("all") && brands.length > 0) {
+      shoesData = shoesData.filter((shoe) =>
+        brands.includes(String(shoe.brand).toLowerCase()),
+      );
+    }
+
+    // =====================================================
+    // FILTER : SIZE
+    // =====================================================
+
+    if (!sizes.includes("all") && sizes.length > 0) {
+      const selectedSizes = sizes
+        .map((size) => parseFloat(size))
+        .filter((size) => !isNaN(size));
+
+      if (selectedSizes.length > 0) {
+        shoesData = shoesData.filter((shoe) =>
+          selectedSizes.includes(Number(shoe.size)),
+        );
+      }
+    }
+
+    // =====================================================
+    // FILTER : CONDITION
+    // =====================================================
+
+    if (!conditions.includes("all") && conditions.length > 0) {
+      shoesData = shoesData.filter((shoe) => {
+        const condition = Number(shoe.condition);
+
+        return conditions.some((selectedCondition) => {
+          switch (selectedCondition) {
+            case "90-100":
+              return condition >= 90 && condition <= 100;
+
+            case "80-89":
+              return condition >= 80 && condition <= 89;
+
+            case "70-79":
+              return condition >= 70 && condition <= 79;
+
+            case "below-70":
+              return condition < 70;
+
+            default:
+              return true;
+          }
+        });
+      });
+    }
+
+    // =====================================================
+    // FILTER : PRICE
+    // =====================================================
+
+    if (!prices.includes("all") && prices.length > 0) {
+      shoesData = shoesData.filter((shoe) => {
+        const price = Number(String(shoe.price).replace(/,/g, ""));
+
+        return prices.some((selectedPrice) => {
+          switch (selectedPrice) {
+            case "under-1000":
+              return price < 1000;
+
+            case "1000-2000":
+              return price >= 1000 && price <= 2000;
+
+            case "2000-3000":
+              return price > 2000 && price <= 3000;
+
+            case "3000-plus":
+              return price > 3000;
+
+            default:
+              return true;
+          }
+        });
+      });
+    }
+
+    // =====================================================
+    // ส่งข้อมูลไปหน้า Shop
+    // =====================================================
+
     res.render("pages/shop", {
-      shoes: shoesData,
-      currentBrand: selectedBrand,
+      products: shoesData,
+
+      // ถ้ามีหลายค่า จะส่งเป็น Array
+      selectedBrand: currentBrand,
+
+      selectedSize: currentSize,
+
+      selectedCondition: currentCondition,
+
+      selectedPrice: currentPrice,
+
+      selectedSearch: currentSearch,
+
       pageData: {
-        title: "Shop - EGO",
-        currentBrand: selectedBrand,
+        title: "Shop - EGO", //แก้ไขชื่อเพจ
       },
     });
   } catch (error) {
     console.error(error);
+
     res.status(500).send("Server Error");
   }
 });

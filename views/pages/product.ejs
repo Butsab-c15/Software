@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <?- include('../partials/head') ?>
+  <body class="bg-light">
+    <?- include('../partials/header') ?>  <?- include('../partials/nav') ?>
+
+    <!-- ================= BREADCRUMB ================= -->
+    <section class="bg-white border-bottom py-3">
+      <div class="container">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0" style="font-size: 1.1rem">
+            <li class="breadcrumb-item">
+              <a href="/" class="text-decoration-none text-secondary">Home</a>
+            </li>
+            <li class="breadcrumb-item">
+              <a href="/shop" class="text-decoration-none text-secondary"
+                >Shoes</a
+              >
+            </li>
+            <li class="breadcrumb-item">
+              <a
+                href="/shop?brand=<?- product.brand ?>"
+                class="text-decoration-none text-secondary text-capitalize"
+              >
+                <?- product.brand ?>
+              </a>
+            </li>
+            <li
+              class="breadcrumb-item active text-dark fw-bold"
+              aria-current="page"
+            >
+              <?- product.name ?>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ================= PRODUCT DETAILS ================= -->
+    <section class="py-5">
+      <div class="container">
+        <div class="row gx-5">
+          <div class="col-md-6 mb-4 mb-md-0">
+            <div
+              class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center justify-content-center"
+              style="height: 500px"
+            >
+              <img
+                src="<?- product.image ?>"
+                alt="<?- product.name ?>"
+                class="img-fluid"
+                style="max-height: 100%; object-fit: contain"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6 d-flex flex-column justify-content-center">
+          
+
+            <h1 class="fw-bold text-dark mb-2"><?- product.name ?></h1>
+            <p class="text-muted text-capitalize fs-5 mb-4">
+              Brand: <?- product.brand ?>
+            </p>
+
+            <h2 class="fw-bold text-dark mb-4" style="font-size: 2.5rem">
+              ฿<?- product.price ?>
+            </h2>
+
+            <div class="mb-4">
+              <p class="fw-bold mb-2 fs-5">Size</p>
+              <div
+                class="border border-2 border-dark rounded d-inline-block px-4 py-2 fs-5 fw-bold bg-white shadow-sm"
+              >
+                <?- product.size ?>
+              </div>
+            </div>
+
+            <hr class="my-4" />
+
+            <div class="d-grid gap-3">
+              <button class="btn btn-dark btn-lg rounded-pill py-3 fw-bold">
+                Buy Now
+              </button>
+              <button
+                class="btn btn-outline-dark btn-lg rounded-pill py-3 fw-bold"
+              >
+                Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <?- include('../partials/footer') ?>
+  </body>
+</html>
