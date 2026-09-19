@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// ข้อมูลจำลอง (Mock Data)
+// ข้อมูลจำลอง (Mock Data)เป็นDatabeaseได้มั้ย
 const mockShoes = [
   {
     id: 1,
@@ -479,52 +479,160 @@ const mockShoes = [
   },
 ];
 
-// หน้าแสดงรายการสินค้า (Shop)
+// หน้าแสดงรายการสินค้า (Shop)==> ของฉัน
 router.get("/", async (req, res) => {
   try {
-    const currentBrand = req.query.brand || "all";
-    let shoesData;
+    // =====================================================
+    // รับค่าจาก Filter
+    // รองรับทั้งค่าเดียว และหลายค่า
+    // =====================================================
 
-    if (currentBrand !== "all") {
-      shoesData = mockShoes.filter(
-        (shoe) => shoe.brand === currentBrand.toLowerCase(),
+    let currentSearch = req.query.q || "";
+    let currentBrand = req.query.brand || "all";
+    let currentSize = req.query.size || "all";
+    let currentCondition = req.query.condition || "all";
+    let currentPrice = req.query.price || "all";
+
+    // ทำให้ค่าที่รับมาเป็น Array เสมอ
+    const brands = Array.isArray(currentBrand) ? currentBrand : [currentBrand];
+
+    const sizes = Array.isArray(currentSize) ? currentSize : [currentSize];
+
+    const conditions = Array.isArray(currentCondition)
+      ? currentCondition
+      : [currentCondition];
+
+    const prices = Array.isArray(currentPrice) ? currentPrice : [currentPrice];
+
+    // =====================================================
+    // เริ่มต้นด้วยสินค้าทั้งหมด
+    // =====================================================
+
+    let shoesData = [...mockShoes];
+
+    // =====================================================
+    // SEARCH
+    // =====================================================
+
+    if (currentSearch.trim()) {
+      const keyword = currentSearch.trim().toLowerCase();
+
+      shoesData = shoesData.filter((shoe) =>
+        String(shoe.name || "")
+          .toLowerCase()
+          .includes(keyword),
       );
-    } else {
-      shoesData = mockShoes;
     }
+
+    // =====================================================
+    // FILTER : BRAND
+    // =====================================================
+
+    if (!brands.includes("all") && brands.length > 0) {
+      shoesData = shoesData.filter((shoe) =>
+        brands.includes(String(shoe.brand).toLowerCase()),
+      );
+    }
+
+    // =====================================================
+    // FILTER : SIZE
+    // =====================================================
+
+    if (!sizes.includes("all") && sizes.length > 0) {
+      const selectedSizes = sizes
+        .map((size) => parseFloat(size))
+        .filter((size) => !isNaN(size));
+
+      if (selectedSizes.length > 0) {
+        shoesData = shoesData.filter((shoe) =>
+          selectedSizes.includes(Number(shoe.size)),
+        );
+      }
+    }
+
+    // =====================================================
+    // FILTER : CONDITION
+    // =====================================================
+
+    if (!conditions.includes("all") && conditions.length > 0) {
+      shoesData = shoesData.filter((shoe) => {
+        const condition = Number(shoe.condition);
+
+        return conditions.some((selectedCondition) => {
+          switch (selectedCondition) {
+            case "90-100":
+              return condition >= 90 && condition <= 100;
+
+            case "80-89":
+              return condition >= 80 && condition <= 89;
+
+            case "70-79":
+              return condition >= 70 && condition <= 79;
+
+            case "below-70":
+              return condition < 70;
+
+            default:
+              return true;
+          }
+        });
+      });
+    }
+
+    // =====================================================
+    // FILTER : PRICE
+    // =====================================================
+
+    if (!prices.includes("all") && prices.length > 0) {
+      shoesData = shoesData.filter((shoe) => {
+        const price = Number(String(shoe.price).replace(/,/g, ""));
+
+        return prices.some((selectedPrice) => {
+          switch (selectedPrice) {
+            case "under-1000":
+              return price < 1000;
+
+            case "1000-2000":
+              return price >= 1000 && price <= 2000;
+
+            case "2000-3000":
+              return price > 2000 && price <= 3000;
+
+            case "3000-plus":
+              return price > 3000;
+
+            default:
+              return true;
+          }
+        });
+      });
+    }
+
+    // =====================================================
+    // ส่งข้อมูลไปหน้า Shop
+    // =====================================================
 
     res.render("pages/shop", {
       products: shoesData,
+
+      // ถ้ามีหลายค่า จะส่งเป็น Array
       selectedBrand: currentBrand,
-      pageData: { title: "Shop - Sneaker2Hand" },
+
+      selectedSize: currentSize,
+
+      selectedCondition: currentCondition,
+
+      selectedPrice: currentPrice,
+
+      selectedSearch: currentSearch,
+
+      pageData: {
+        title: "Shop - EGO", //แก้ไขชื่อเพจ
+      },
     });
   } catch (error) {
     console.error(error);
-    res.status(500).send("Server Error");
-  }
-});
 
-// หน้าแสดงรายละเอียดสินค้า (Product Detail)
-router.get("/product/:id", (req, res) => {
-  try {
-    // รับ ID จาก URL และแปลงเป็นตัวเลข
-    const productId = parseInt(req.params.id);
-
-    // ค้นหาสินค้าจาก mockShoes
-    const product = mockShoes.find((shoe) => shoe.id === productId);
-
-    // ถ้าไม่เจอสินค้า ให้ส่งกลับ 404
-    if (!product) {
-      return res.status(404).send("Product not found");
-    }
-
-    // ส่งข้อมูลไปเรนเดอร์ที่หน้า product.ejs
-    res.render("pages/product", {
-      product: product,
-      pageData: { title: `${product.name} - Sneaker2Hand` },
-    });
-  } catch (error) {
-    console.error(error);
     res.status(500).send("Server Error");
   }
 });

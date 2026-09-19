@@ -1,64 +1,614 @@
+<!---หน้าShop-->
 <!doctype html>
-<html lang="en">
-  <?- include('../partials/head') ?>
-  <body class="bg-light">
-    <?- include('../partials/header') ?> 
-    <?- include('../partials/nav') ?>
 
-    <!-- ================= BRAND MENU ================= -->
-    <section class="bg-white border-bottom">
-      <div class="container">
-        <div class="d-flex justify-content-center flex-wrap py-3 gap-4">
-          <a href="/shop" class="brand-link <? if(selectedBrand.toLowerCase() === 'all') { ?>active<? } ?>">All</a>
-          <a href="/shop?brand=nike" class="brand-link <? if(selectedBrand.toLowerCase() === 'nike') { ?>active<? } ?>">Nike</a>
-          <a href="/shop?brand=adidas" class="brand-link <? if(selectedBrand.toLowerCase() === 'adidas') { ?>active<? } ?>">Adidas</a>
-          <a href="/shop?brand=jordan" class="brand-link <? if(selectedBrand.toLowerCase() === 'jordan') { ?>active<? } ?>">Jordan</a>
-          <a href="/shop?brand=newbalance" class="brand-link <? if(selectedBrand.toLowerCase() === 'newbalance') { ?>active<? } ?>">New Balance</a>
-          <a href="/shop?brand=converse" class="brand-link <? if(selectedBrand.toLowerCase() === 'converse') { ?>active<? } ?>">Converse</a>
-          <a href="/shop?brand=puma" class="brand-link <? if(selectedBrand.toLowerCase() === 'puma') { ?>active<? } ?>">Puma</a>
-          <a href="/shop?brand=asics" class="brand-link <? if(selectedBrand.toLowerCase() === 'asics') { ?>active<? } ?>">ASICS</a>
-          <a href="/shop?brand=vans" class="brand-link <? if(selectedBrand.toLowerCase() === 'vans') { ?>active<? } ?>">Vans</a>
-        </div>
+
+<html>
+  <?- include('../partials/head') -?>
+
+
+  <body>
+
+
+    <?- include('../partials/header') -?>
+    <?- include('../partials/nav') -?>
+
+
+
+
+    <!-- ================= BRAND MENU(ของฉัน ฉันแก้ไข) ================= -->
+
+
+    <section
+      class="w-100 border-bottom"
+      style="background-color: #e5e7eb !important; height: 40px;"
+    >
+
+
+      <div
+        class="container h-100 d-flex justify-content-center align-items-center gap-4"
+        style="font-size: 0.95rem;"
+      >
+
+
+        <a
+          href="/shop"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'all' ? 'active' : '' %>"
+        >
+          All
+        </a>
+
+
+        <a
+          href="/shop?brand=nike"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'nike' ? 'active' : '' %>"
+        >
+          Nike
+        </a>
+
+
+        <a
+          href="/shop?brand=adidas"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'adidas' ? 'active' : '' %>"
+        >
+          Adidas
+        </a>
+
+
+        <a
+          href="/shop?brand=jordan"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'jordan' ? 'active' : '' %>"
+        >
+          Jordan
+        </a>
+
+
+        <a
+          href="/shop?brand=newbalance"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'newbalance' ? 'active' : '' %>"
+        >
+          New Balance
+        </a>
+
+
+        <a
+          href="/shop?brand=converse"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'converse' ? 'active' : '' %>"
+        >
+          Converse
+        </a>
+
+
+        <a
+          href="/shop?brand=puma"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'puma' ? 'active' : '' %>"
+        >
+          Puma
+        </a>
+
+
+        <a
+          href="/shop?brand=asics"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'asics' ? 'active' : '' %>"
+        >
+          ASICS
+        </a>
+
+
+        <a
+          href="/shop?brand=vans"
+          class="brand-link text-decoration-none <%= selectedBrand.toLowerCase() === 'vans' ? 'active' : '' %>"
+        >
+          Vans
+        </a>
+
+
       </div>
+
+
     </section>
 
-    <!-- ================= FILTER BAR ================= -->
-    <section class="py-4 bg-light">
-      <div class="container">
-        <div class="row g-3">
-          <div class="col-lg"><select class="form-select bg-white border-0 shadow-sm"><option>Brand</option></select></div>
-          <div class="col-lg"><select class="form-select bg-white border-0 shadow-sm"><option>Size</option></select></div>
-          <div class="col-lg"><select class="form-select bg-white border-0 shadow-sm"><option>Condition</option></select></div>
-          <div class="col-lg"><select class="form-select bg-white border-0 shadow-sm"><option>Price</option></select></div>
-          <div class="col-lg"><select class="form-select bg-white border-0 shadow-sm"><option>Sort By</option></select></div>
-        </div>
+
+
+
+<!-- ================= FILTER BAR(ของฉัน ฉันแก้ไข) ================= -->
+<section class="filter-bar-section bg-light py-4">
+  <div class="container">
+    <div class="filter-bar">
+      <!-- Brand -->
+      <button
+        type="button"
+        class="filter-button"
+        data-filter="brand"
+      >
+        <span>Brand</span>
+        <i class="bi bi-chevron-down"></i>
+      </button>
+
+      <!-- Size -->
+      <button
+        type="button"
+        class="filter-button"
+        data-filter="size"
+      >
+        <span>Size</span>
+        <i class="bi bi-chevron-down"></i>
+      </button>
+
+
+      <!-- Condition -->
+      <button
+        type="button"
+        class="filter-button"
+        data-filter="condition"
+      >
+        <span>Condition</span>
+        <i class="bi bi-chevron-down"></i>
+      </button>
+
+
+      <!-- Price -->
+      <button
+        type="button"
+        class="filter-button"
+        data-filter="price"
+      >
+        <span>Price</span>
+        <i class="bi bi-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FILTER OVERLAY ================= -->
+<div
+  class="filter-overlay"
+  id="filterOverlay">
+</div>
+
+<!-- ================= FILTER SIDE PANEL ================= -->
+
+<aside
+  class="filter-panel"
+  id="filterPanel"
+>
+  <!-- Header -->
+
+  <div class="filter-panel-header">
+    <h4>Filter by</h4>
+    <button
+      type="button"
+      id="closeFilter"
+      class="filter-close"
+      
+    >
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <!-- Selected filters -->
+  <div
+    class="selected-filters"
+    id="selectedFilters"
+  >
+  </div>
+
+  <!-- ================= BRAND ================= -->
+
+  <div class="filter-section">
+
+    <button
+      type="button"
+      class="filter-title"
+      data-section="brand"
+    >
+      <span>Brand</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+    
+    <div
+      class="filter-content"
+      id="filter-brand"
+    >
+      <!-- Search -->
+      <div class="brand-search-box">
+        <i class="bi bi-search"></i>
+        <input
+          type="text"
+          id="brandSearch"
+          placeholder="Search"
+        >
       </div>
-    </section>
+
+      <!-- Brands -->
+      <div class="filter-options">
+
+        <label class="filter-check">
+          <span>Nike</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="nike"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Adidas</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="adidas"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Jordan</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="jordan"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>New Balance</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="newbalance"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Converse</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="converse"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Puma</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="puma"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>ASICS</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="asics"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Vans</span>
+          <input
+            type="checkbox"
+            name="brandFilter"
+            value="vans"
+          >
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SIZE ================= -->
+  <div class="filter-section">
+    <button
+      type="button"
+      class="filter-title"
+      data-section="size"
+    >
+      <span>Size</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="filter-content"
+      id="filter-size"
+    >
+      <div class="filter-options">
+
+        <label class="filter-check">
+          <span>36</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="36"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>37</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="37"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>38</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="38"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>39</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="39"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>40</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="40"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>41</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="41"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>42</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="42"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>43</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="43"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>44</span>
+          <input
+            type="checkbox"
+            name="sizeFilter"
+            value="44"
+          >
+        </label>
+
+        <!-- Custom Size -->
+        <label class="filter-check custom-size-option">
+          <span>Custom Size</span>
+          <input
+            type="checkbox"
+            id="customSizeCheck"
+          >
+        </label>
+
+        <input
+          type="number"
+          id="customSizeInput"
+          class="custom-size-input"
+          placeholder="Enter size"
+          min="1"
+          step="0.5"
+        >
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= CONDITION ================= -->
+
+  <div class="filter-section">
+    <button
+      type="button"
+      class="filter-title"
+      data-section="condition"
+    >
+      <span>Condition</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="filter-content"
+      id="filter-condition"
+    >
+      <div class="filter-options">
+
+        <label class="filter-check">
+          <span>90% - 100%</span>
+          <input
+            type="checkbox"
+            name="conditionFilter"
+            value="90-100"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>80% - 89%</span>
+          <input
+            type="checkbox"
+            name="conditionFilter"
+            value="80-89"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>70% - 79%</span>
+          <input
+            type="checkbox"
+            name="conditionFilter"
+            value="70-79"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>Below 70%</span>
+          <input
+            type="checkbox"
+            name="conditionFilter"
+            value="below-70"
+          >
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= PRICE ================= -->
+  <div class="filter-section">
+
+    <button
+      type="button"
+      class="filter-title"
+      data-section="price"
+    >
+      <span>Price</span>
+      <i class="bi bi-chevron-down"></i>
+    </button>
+
+    <div
+      class="filter-content"
+      id="filter-price"
+    >
+      <div class="filter-options">
+
+        <label class="filter-check">
+          <span>Under ฿1,000</span>
+          <input
+            type="checkbox"
+            name="priceFilter"
+            value="under-1000"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>฿1,000 - ฿2,000</span>
+          <input
+            type="checkbox"
+            name="priceFilter"
+            value="1000-2000"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>฿2,000 - ฿3,000</span>
+          <input
+            type="checkbox"
+            name="priceFilter"
+            value="2000-3000"
+          >
+        </label>
+
+        <label class="filter-check">
+          <span>฿3,000+</span>
+          <input
+            type="checkbox"
+            name="priceFilter"
+            value="3000-plus"
+          >
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= BOTTOM ================= -->
+  <div class="filter-bottom">
+    <button
+      type="button"
+      id="clearFilters"
+      class="clear-button"
+    >
+      Clear all
+    </button>
+  </div>
+</aside>
 
     <!-- ================= PRODUCT GRID ================= -->
     <section class="pb-5 bg-light">
       <div class="container">
         <div class="row g-4">
-          
           <? if (typeof products !== 'undefined' && products.length > 0) { ?>
-            
             <? products.forEach(function(product) { ?>
-              <div class="col-lg-3 col-md-6">
-                <div class="card h-100 shadow-sm border-0 rounded-4 p-3 d-flex flex-column">
-                  <div class="rounded-3 mb-3 d-flex align-items-center justify-content-center" style="height: 200px; background-color: #f4f4f4;">
-                    <img src="<?= product.image ?>" alt="<?= product.name ?>" style="max-height: 180px; max-width: 100%; object-fit: contain;" />
+              <div
+                 class="col-lg-3 col-md-6 product-item"
+                 data-brand="<?= product.brand ?>"
+                 data-size="<?= product.size ?>"
+                 data-condition="<?= product.condition ?>"
+                 data-price="<?= product.price ?>"
+                >
+                <div
+                  class="card h-100 shadow-sm border-0 rounded-4 p-3 d-flex flex-column"
+                >
+                  
+                <!-- Product Image -->
+                  <div
+                    class="rounded-3 mb-3 d-flex align-items-center justify-content-center"
+                    style="
+                      height: 200px;
+                      background-color: #f4f4f4;
+                    "
+                  >
+                    <img
+                      src="<?= product.image ?>"
+                      alt="<?= product.name ?>"
+                      style="
+                        max-height: 180px;
+                        max-width: 100%;
+                        object-fit: contain;
+                      "
+                    />
                   </div>
-                  <div class="card-body p-0 d-flex flex-column flex-grow-1">
+
+                  <!-- Product Information -->
+                  <div
+                    class="card-body p-0 d-flex flex-column flex-grow-1"
+                  >
                     <div>
-                      <span class="badge <?= product.badgeColor ?> mb-2"><?= product.condition ?>% Condition</span>
+                      <span
+                        class="badge <?= product.badgeColor ?> mb-2"
+                      >
+                        <?= product.condition ?>% Condition
+                      </span>
                     </div>
-                    <h5 class="fw-bold text-dark"><?= product.name ?></h5>
-                    <p class="text-secondary mb-3"><small>Size <?= product.size ?></small></p>
-                    
-                    <!-- ราคาดึงมาตรงๆ ได้เลย เพราะใน mock data เป็น string แล้ว -->
-                    <h4 class="fw-bold text-dark mb-4">฿<?= product.price ?></h4>
-                    
-                    <a href="/shop/product/<?= product.id ?>" class="btn btn-dark w-100 rounded-pill mt-auto">
+
+                    <h5 class="fw-bold text-dark">
+                      <?= product.name ?>
+                    </h5>
+
+                    <p class="text-secondary mb-3">
+                      <small>
+                        Size <?= product.size ?>
+                      </small>
+                    </p>
+                    <!-- Price -->
+                    <h4 class="fw-bold text-dark mb-4">
+                      ฿<?= product.price ?>
+                    </h4>
+
+                    <!-- View Details -->
+                    <a
+                      href="/shop/product/<?= product.id ?>"
+                      class="btn btn-dark w-100 rounded-pill mt-auto"
+                    >
                       View Details
                     </a>
                   </div>
@@ -67,22 +617,1728 @@
             <? }); ?>
 
           <? } else { ?>
+
+            <!-- No Products -->
             <div class="col-12 text-center py-5">
-              <h4 class="text-muted">No products found for this brand.</h4>
-              <a href="/shop" class="btn btn-outline-dark rounded-pill mt-3">View All Brands</a>
+
+              <h4 class="text-muted">
+                No products found for this brand.
+              </h4>
+
+              <a
+                href="/shop"
+                class="btn btn-outline-dark rounded-pill mt-3"
+              >
+                View All Brands
+              </a>
+
             </div>
           <? } ?>
-
         </div>
       </div>
     </section>
 
-    <style>
-      .brand-link { color: #8c8c8c; text-decoration: none; font-weight: 500; transition: 0.2s; font-size: 1.1rem; }
-      .brand-link:hover { color: #333; }
-      .brand-link.active { color: #000; font-weight: 700; border-bottom: 2px solid #000; padding-bottom: 2px; }
-    </style>
+   <!-- ================= STYLE ================= -->
+
+<style>
+
+/* =====================================================
+   BRAND MENU
+   ===================================================== */
+
+.brand-link {
+  color: #555555;
+  text-decoration: none;
+  font-weight: 500;
+  transition: 0.2s;
+}
+
+.brand-link:hover {
+  color: #333;
+}
+
+.brand-link.active {
+  color: #111;
+  font-weight: 600;
+  border-bottom: 2px solid #111;
+}
+
+/* =====================================================
+   FILTER BAR
+   ===================================================== */
+
+.filter-bar-section {
+  background: #f8f9fa;
+  padding: 16px 0 !important;
+}
+
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  width: 110%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  overflow-x: auto;
+  white-space: nowrap;
+
+  scrollbar-width: none;
+}
+
+.filter-bar::-webkit-scrollbar {
+  display: none;
+}
+
+/* FILTER BUTTON */
+
+.filter-button {
+  width: auto;
+  min-width: 88px;
+  height: 42px;
+
+  flex: 0 0 auto;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  padding: 0 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #dcdcdc;
+
+  border-radius: 22px;
+
+  font-family: "Poppins", "Segoe UI", sans-serif;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  color: #222;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+/* Hover */
+
+.filter-button:hover {
+  border-color: #e9e6e6;
+  background: #fafafa;
+}
+
+
+/* ลูกศร */
+
+.filter-button i {
+  font-size: 11px;
+
+  transition: transform 0.2s ease;
+}
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 768px) {
+
+  .filter-bar {
+    padding: 0 10px;
+
+    gap: 7px;
+  }
+
+  .filter-button {
+    height: 34px;
+
+    padding: 0 12px;
+
+    font-size: 12px;
+  }
+
+}
+/* =====================================================
+   OVERLAY
+   ===================================================== */
+
+
+.filter-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.filter-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =====================================================
+   FILTER PANEL
+   ===================================================== */
+
+
+.filter-panel {
+  position: fixed;
+
+  top: 0;
+  right: 0;
+
+  width: 430px;
+  max-width: 100%;
+
+  height: 100vh;
+  height: 100dvh;
+
+  background: #fff;
+
+  z-index: 1000;
+
+  /* สำคัญ */
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* ให้เลื่อนด้วยเมาส์ / Touch ได้ */
+  -webkit-overflow-scrolling: touch;
+
+  /* ไม่ให้ scroll ไปกระทบหน้าเว็บด้านหลัง */
+  overscroll-behavior: contain;
+
+  transform: translateX(100%);
+
+  transition: transform 0.3s ease;
+
+  box-shadow: -5px 0 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ตอนเปิด Filter */
+
+.filter-panel.active {
+  transform: translateX(0);
+}
+
+
+
+
+/* ทำให้ scrollbar แสดงชัดเจน */
+
+
+.filter-panel::-webkit-scrollbar {
+  width: 7px;
+}
+
+
+.filter-panel::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+
+.filter-panel::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 10px;
+}
+
+
+.filter-panel::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+
+.filter-panel.active {
+  transform: translateX(0);
+}
+
+
+
+
+/* =====================================================
+   PANEL HEADER
+   ===================================================== */
+
+
+.filter-panel-header {
+  min-height: 70px;
+
+
+  padding: 0 22px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: space-between;
+
+
+  border-bottom: 1px solid #e5e5e5;
+
+
+  flex-shrink: 0;
+}
+
+
+.filter-panel-header h4 {
+  margin: 0;
+
+
+  font-family: "Poppins", "Segoe UI", sans-serif;
+
+
+  font-size: 20px;
+
+
+  font-weight: 600;
+
+
+  color: #111;
+}
+
+
+.filter-close {
+  width: 36px;
+  height: 36px;
+
+
+  display: flex;
+
+
+  align-items: center;
+  justify-content: center;
+
+
+  border: none;
+
+
+  background: transparent;
+
+
+  border-radius: 50%;
+
+
+  cursor: pointer;
+
+
+  font-size: 17px;
+
+
+  transition: 0.2s;
+}
+
+
+.filter-close:hover {
+  background: #f3f3f3;
+}
+
+
+
+
+/* =====================================================
+   SELECTED FILTERS
+   ===================================================== */
+
+
+.selected-filters {
+  padding: 12px 22px;
+
+
+  display: flex;
+
+
+  flex-wrap: wrap;
+
+
+  gap: 7px;
+
+
+  border-bottom: 1px solid #eeeeee;
+
+
+  min-height: 10px;
+}
+
+
+.selected-filter-tag {
+  display: inline-flex;
+
+
+  align-items: center;
+
+
+  gap: 7px;
+
+
+  padding: 7px 11px;
+
+
+  background: #f1f1f1;
+
+
+  border-radius: 20px;
+
+
+  font-size: 13px;
+
+
+  color: #333;
+}
+
+
+.selected-filter-tag button {
+  border: none;
+
+
+  background: transparent;
+
+
+  padding: 0;
+
+
+  cursor: pointer;
+
+
+  font-size: 13px;
+
+
+  color: #555;
+}
+
+
+
+
+/* =====================================================
+   FILTER SECTION
+   ===================================================== */
+
+
+.filter-section {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+
+.filter-title {
+  width: 100%;
+
+
+  height: 58px;
+
+
+  padding: 0 22px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: space-between;
+
+
+  border: none;
+
+
+  background: #ffffff;
+
+
+  font-family: "Poppins", "Segoe UI", sans-serif;
+
+
+  font-size: 15px;
+
+
+  font-weight: 600;
+
+
+  color: #222;
+
+
+  cursor: pointer;
+
+
+  transition: 0.2s;
+}
+
+
+.filter-title:hover {
+  background: #fafafa;
+}
+
+
+.filter-title i {
+  transition: transform 0.2s ease;
+}
+
+
+
+
+/* =====================================================
+   FILTER CONTENT
+   ===================================================== */
+
+
+.filter-content {
+  display: none;
+
+
+  padding: 0 22px 18px;
+
+
+  background: #fff;
+}
+
+
+.filter-content.active {
+  display: block;
+}
+
+
+
+
+/* =====================================================
+   SEARCH
+   ===================================================== */
+
+
+.brand-search-box {
+  height: 42px;
+
+
+  margin-bottom: 8px;
+
+
+  padding: 0 12px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  gap: 8px;
+
+
+  border: 1px solid #dddddd;
+
+
+  border-radius: 8px;
+
+
+  background: #fff;
+}
+
+
+.brand-search-box i {
+  color: #999;
+}
+
+
+.brand-search-box input {
+  width: 100%;
+
+
+  border: none;
+
+
+  outline: none;
+
+
+  font-size: 13px;
+}
+
+
+
+
+/* =====================================================
+   OPTIONS
+   ===================================================== */
+
+
+.filter-options {
+  display: flex;
+
+
+  flex-direction: column;
+}
+
+
+.filter-check {
+  min-height: 43px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: space-between;
+
+
+  cursor: pointer;
+
+
+  font-size: 14px;
+
+
+  color: #333;
+
+
+  border-radius: 6px;
+
+
+  padding: 0 4px;
+
+
+  transition: 0.15s;
+}
+
+
+.filter-check:hover {
+  background: #f8f8f8;
+}
+
+
+.filter-check input {
+  width: 19px;
+  height: 19px;
+
+
+  cursor: pointer;
+
+
+  accent-color: #111;
+}
+
+
+
+
+/* =====================================================
+   CUSTOM SIZE
+   ===================================================== */
+
+
+.custom-size-input {
+  width: 100%;
+
+
+  height: 44px;
+
+
+  margin-top: 8px;
+
+
+  padding: 0 12px;
+
+
+  border: 1px solid #dddddd;
+
+
+  border-radius: 8px;
+
+
+  outline: none;
+
+
+  display: none;
+
+
+  font-size: 14px;
+}
+
+
+.custom-size-input:focus {
+  border-color: #111;
+}
+
+
+
+
+/* =====================================================
+   BOTTOM BUTTONS
+   ===================================================== */
+
+
+.filter-bottom {
+  margin-top: auto;
+
+
+  min-height: 72px;
+
+
+  padding: 14px 22px;
+
+
+  display: flex;
+
+
+  align-items: center;
+
+
+  justify-content: flex-end;
+
+
+  gap: 10px;
+
+
+  border-top: 1px solid #e5e5e5;
+
+
+  background: #fff;
+
+
+  flex-shrink: 0;
+}
+
+
+.clear-button {
+  height: 42px;
+
+
+  padding: 0 18px;
+
+
+  background: #fff;
+
+
+  border: 1px solid #222;
+
+
+  border-radius: 8px;
+
+
+  font-size: 14px;
+
+
+  cursor: pointer;
+
+
+  transition: 0.2s;
+}
+
+
+.clear-button:hover {
+  background: #f5f5f5;
+}
+
+
+.show-results-button {
+  height: 42px;
+
+
+  padding: 0 20px;
+
+
+  background: #111;
+
+
+  color: #fff;
+
+
+  border: 1px solid #111;
+
+
+  border-radius: 8px;
+
+
+  font-size: 14px;
+
+
+  cursor: pointer;
+
+
+  transition: 0.2s;
+}
+
+
+.show-results-button:hover {
+  background: #333;
+}
+
+
+
+
+/* =====================================================
+   PRODUCT CARD
+   ===================================================== */
+
+
+.card {
+  transition: 0.3s;
+}
+
+
+.card:hover {
+  transform: translateY(-5px);
+
+
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+
+@media (max-width: 768px) {
+
+
+  .filter-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+
+  .filter-panel {
+    width: 100%;
+  }
+
+
+}
+
+
+@media (max-width: 480px) {
+
+
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+
+}
+
+
+</style>
+
+
+
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =====================================================
+     ELEMENTS
+     ===================================================== */
+
+  const filterButtons =
+    document.querySelectorAll(".filter-button");
+
+  const filterPanel =
+    document.getElementById("filterPanel");
+
+  const filterOverlay =
+    document.getElementById("filterOverlay");
+
+  const closeFilter =
+    document.getElementById("closeFilter");
+
+  const filterTitles =
+    document.querySelectorAll(".filter-title");
+
+  const clearFilters =
+    document.getElementById("clearFilters");
+
+  const selectedFilters =
+    document.getElementById("selectedFilters");
+
+  const brandSearch =
+    document.getElementById("brandSearch");
+
+  const customSizeCheck =
+    document.getElementById("customSizeCheck");
+
+  const customSizeInput =
+    document.getElementById("customSizeInput");
+
+  const products =
+    document.querySelectorAll(".product-item");
+
+
+  /* =====================================================
+     OPEN FILTER PANEL
+     ===================================================== */
+
+  function openPanel(sectionName) {
+
+    if (!filterPanel || !filterOverlay) {
+      return;
+    }
+
+    filterPanel.classList.add("active");
+
+    filterOverlay.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+
+
+    filterTitles.forEach(function (title) {
+
+      const section =
+        title.getAttribute("data-section");
+
+      const content =
+        document.getElementById(
+          "filter-" + section
+        );
+
+      const icon =
+        title.querySelector("i");
+
+
+      if (section === sectionName) {
+
+        if (content) {
+          content.style.display = "block";
+        }
+
+        if (icon) {
+
+          icon.classList.remove(
+            "bi-chevron-down"
+          );
+
+          icon.classList.add(
+            "bi-chevron-up"
+          );
+        }
+      }
+    });
+  }
+
+
+  /* =====================================================
+     FILTER BAR BUTTON
+     ===================================================== */
+
+  filterButtons.forEach(function (button) {
+
+    button.addEventListener(
+      "click",
+      function () {
+
+        const section =
+          button.getAttribute(
+            "data-filter"
+          );
+
+        openPanel(section);
+
+      }
+    );
+
+  });
+  
+  /* =====================================================
+     CLOSE PANEL
+     ===================================================== */
+
+  function closePanel() {
+
+    if (!filterPanel || !filterOverlay) {
+      return;
+    }
+
+    filterPanel.classList.remove("active");
+
+    filterOverlay.classList.remove("active");
+
+    document.body.style.overflow = "";
+
+  }
+
+
+  if (closeFilter) {
+
+    closeFilter.addEventListener(
+      "click",
+      closePanel
+    );
+
+  }
+
+
+  if (filterOverlay) {
+
+    filterOverlay.addEventListener(
+      "click",
+      closePanel
+    );
+
+  }
+
+  /* =====================================================
+     OPEN / CLOSE FILTER SECTION
+     ===================================================== */
+
+  filterTitles.forEach(function (title) {
+
+    title.addEventListener(
+      "click",
+      function () {
+
+        const section =
+          title.getAttribute(
+            "data-section"
+          );
+
+        const content =
+          document.getElementById(
+            "filter-" + section
+          );
+
+        const icon =
+          title.querySelector("i");
+
+
+        if (!content) {
+          return;
+        }
+
+
+        if (
+          content.style.display === "none" ||
+          content.style.display === ""
+        ) {
+
+          content.style.display = "block";
+
+          if (icon) {
+
+            icon.classList.remove(
+              "bi-chevron-down"
+            );
+
+            icon.classList.add(
+              "bi-chevron-up"
+            );
+
+          }
+
+        } else {
+
+          content.style.display = "none";
+
+          if (icon) {
+
+            icon.classList.remove(
+              "bi-chevron-up"
+            );
+
+            icon.classList.add(
+              "bi-chevron-down"
+            );
+          }
+        }
+      }
+    );
+  });
+
+
+  /* =====================================================
+     GET SELECTED FILTERS
+     ===================================================== */
+
+  function getSelectedValues(name) {
+
+    return Array.from(
+      document.querySelectorAll(
+        'input[name="' + name + '"]:checked'
+      )
+    ).map(function (checkbox) {
+
+      return checkbox.value
+        .toLowerCase()
+        .trim();
+
+    });
+
+  }
+
+  /* =====================================================
+     REALTIME FILTER
+     ===================================================== */
+
+  function applyFilters() {
+
+    const selectedBrands =
+      getSelectedValues("brandFilter");
+
+    const selectedSizes =
+      getSelectedValues("sizeFilter");
+
+    const selectedConditions =
+      getSelectedValues("conditionFilter");
+
+    const selectedPrices =
+      getSelectedValues("priceFilter");
+
+
+    /* =================================================
+       CUSTOM SIZE
+       ================================================= */
+
+    let customSize = null;
+
+    if (
+      customSizeCheck &&
+      customSizeCheck.checked &&
+      customSizeInput &&
+      customSizeInput.value !== ""
+    ) {
+
+      customSize =
+        parseFloat(customSizeInput.value);
+
+    }
+
+    /* =================================================
+       FILTER PRODUCTS
+       ================================================= */
+
+    products.forEach(function (product) {
+
+      const brand =
+        (
+          product.dataset.brand || ""
+        )
+          .toLowerCase()
+          .trim();
+
+      const size =
+        parseFloat(
+          product.dataset.size
+        );
+
+      const condition =
+        parseFloat(
+          product.dataset.condition
+        );
+
+      const price =
+        parseFloat(
+          product.dataset.price
+        );
+
+
+      /* =============================================
+         BRAND
+         ============================================= */
+
+      let brandMatch = true;
+
+      if (selectedBrands.length > 0) {
+
+        brandMatch =
+          selectedBrands.includes(brand);
+
+      }
+
+      /* =============================================
+         SIZE
+         ============================================= */
+
+      let sizeMatch = true;
+
+      if (selectedSizes.length > 0) {
+
+        sizeMatch =
+          selectedSizes.some(function (selectedSize) {
+
+            return size ===
+              parseFloat(selectedSize);
+        });
+      }
+
+      /* =============================================
+         CUSTOM SIZE
+         ============================================= */
+      if (
+        customSize !== null &&
+        !isNaN(customSize)
+      ) {
+
+        sizeMatch =
+          size === customSize;
+
+      }
+
+      /* =============================================
+         CONDITION
+         ============================================= */
+
+      let conditionMatch = true;
+
+      if (selectedConditions.length > 0) {
+
+        conditionMatch =
+          selectedConditions.some(
+            function (range) {
+
+              if (range === "90-100") {
+
+                return (
+                  condition >= 90 &&
+                  condition <= 100
+                );
+
+              }
+
+              if (range === "80-89") {
+
+                return (
+                  condition >= 80 &&
+                  condition <= 89
+                );
+
+              }
+
+              if (range === "70-79") {
+
+                return (
+                  condition >= 70 &&
+                  condition <= 79
+                );
+              }
+
+              if (range === "below-70") {
+                return condition < 70;
+              }
+              return true;
+            }
+          );
+      }
+
+      /* =============================================
+         PRICE
+         ============================================= */
+
+      let priceMatch = true;
+
+      if (selectedPrices.length > 0) {
+
+        priceMatch =
+          selectedPrices.some(
+            function (range) {
+
+              if (range === "under-1000") {
+
+                return price < 1000;
+
+              }
+
+              if (range === "1000-2000") {
+
+                return (
+                  price >= 1000 &&
+                  price <= 2000
+                );
+
+              }
+
+              if (range === "2000-3000") {
+
+                return (
+                  price >= 2000 &&
+                  price <= 3000
+                );
+
+              }
+
+              if (range === "3000-plus") {
+
+                return price >= 3000;
+
+              }
+              return true;
+            }
+          );
+      }
+      /* =============================================
+         FINAL RESULT
+         ============================================= */
+
+      const showProduct =
+        brandMatch &&
+        sizeMatch &&
+        conditionMatch &&
+        priceMatch;
+
+
+      if (showProduct) {
+
+        product.style.display = "";
+
+      } else {
+
+        product.style.display = "none";
+
+      }
+
+    });
+
+
+    updateNoResultsMessage();
+
+    updateSelectedFilters();
+
+  }
+
+  /* =====================================================
+     NO RESULTS MESSAGE
+     ===================================================== */
+
+  function updateNoResultsMessage() {
+
+    let visibleProducts = 0;
+
+    products.forEach(function (product) {
+
+      if (
+        product.style.display !== "none"
+      ) {
+
+        visibleProducts++;
+
+      }
+
+    });
+
+
+    let noResult =
+      document.getElementById(
+        "realtimeNoResult"
+      );
+
+
+    if (visibleProducts === 0) {
+
+      if (!noResult) {
+
+        noResult =
+          document.createElement("div");
+
+        noResult.id =
+          "realtimeNoResult";
+
+        noResult.className =
+          "col-12 text-center py-5";
+
+        noResult.innerHTML = `
+          <h4 class="text-muted">
+            No products found.
+          </h4>
+          <button
+            type="button"
+            class="btn btn-outline-dark rounded-pill mt-3"
+            id="resetRealtimeFilters"
+          >
+            Clear Filters
+          </button>
+        `;
+
+        const productGrid =
+          products.length > 0
+            ? products[0].parentElement
+            : null;
+
+        if (productGrid) {
+
+          productGrid.appendChild(
+            noResult
+          );
+        }
+      }
+    } else {
+      if (noResult) {
+
+        noResult.remove();
+
+      }
+    }
+  }
+
+  /* =====================================================
+     BRAND SEARCH
+     ===================================================== */
+
+  if (brandSearch) {
+
+    brandSearch.addEventListener(
+      "input",
+      function () {
+
+        const keyword =
+          brandSearch.value
+            .toLowerCase()
+            .trim();
+
+
+        const brandOptions =
+          document.querySelectorAll(
+            "#filter-brand .filter-check"
+          );
+
+
+        brandOptions.forEach(
+          function (option) {
+
+            const span =
+              option.querySelector("span");
+
+
+            if (!span) {
+              return;
+            }
+
+
+            const text =
+              span.textContent
+                .toLowerCase();
+
+
+            if (
+              text.includes(keyword)
+            ) {
+
+              option.style.display =
+                "flex";
+
+            } else {
+
+              option.style.display =
+                "none";
+            }
+          }
+        );
+      }
+    );
+  }
+
+  /* =====================================================
+     CUSTOM SIZE
+     ===================================================== */
+
+  if (
+    customSizeCheck &&
+    customSizeInput
+  ) {
+
+    customSizeCheck.addEventListener(
+      "change",
+      function () {
+
+        if (this.checked) {
+
+          customSizeInput.style.display =
+            "block";
+
+          customSizeInput.focus();
+
+        } else {
+
+          customSizeInput.style.display =
+            "none";
+
+          customSizeInput.value = "";
+
+        }
+        applyFilters();
+
+      }
+    );
+
+
+    customSizeInput.addEventListener(
+      "input",
+      function () {
+
+        applyFilters();
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     UPDATE SELECTED FILTER TAGS
+     ===================================================== */
+
+  function updateSelectedFilters() {
+
+    if (!selectedFilters) {
+      return;
+    }
+
+
+    selectedFilters.innerHTML = "";
+
+
+    const checked =
+      document.querySelectorAll(
+        ".filter-panel input[type='checkbox']:checked"
+      );
+
+
+    checked.forEach(
+      function (checkbox) {
+
+        let text = "";
+
+
+        const label =
+          checkbox.closest(
+            ".filter-check"
+          );
+
+
+        if (label) {
+
+          const span =
+            label.querySelector(
+              "span"
+            );
+
+
+          if (span) {
+
+            text =
+              span.textContent.trim();
+          }
+        }
+
+        if (text) {
+
+          const tag =
+            document.createElement(
+              "span"
+            );
+
+          tag.className =
+            "selected-filter-tag";
+
+          tag.innerHTML =
+            text +
+            ' <button type="button">×</button>';
+
+          const removeButton =
+            tag.querySelector(
+              "button"
+            );
+
+          removeButton.addEventListener(
+            "click",
+            function () {
+
+              checkbox.checked =
+                false;
+
+              applyFilters();
+
+            }
+          );
+
+          selectedFilters.appendChild(
+            tag
+          );
+        }
+      }
+    );
+
+    /* =============================================
+       CUSTOM SIZE TAG
+       ============================================= */
+
+    if (
+      customSizeCheck &&
+      customSizeCheck.checked &&
+      customSizeInput &&
+      customSizeInput.value
+    ) {
+
+      const tag =
+        document.createElement(
+          "span"
+        );
+
+      tag.className =
+        "selected-filter-tag";
+
+      tag.innerHTML =
+        "Size " +
+        customSizeInput.value +
+        ' <button type="button">×</button>';
+
+      const removeButton =
+        tag.querySelector(
+          "button"
+        );
+
+      removeButton.addEventListener(
+        "click",
+        function () {
+
+          customSizeCheck.checked =
+            false;
+
+          customSizeInput.value =
+            "";
+
+          customSizeInput.style.display =
+            "none";
+
+          applyFilters();
+
+        }
+      );
+
+      selectedFilters.appendChild(
+        tag
+      );
+
+    }
+
+  }
+
+
+
+  /* =====================================================
+     CHECKBOX REALTIME
+     ===================================================== */
+
+  const allCheckboxes =
+    document.querySelectorAll(
+      ".filter-panel input[type='checkbox']"
+    );
+
+
+  allCheckboxes.forEach(
+    function (checkbox) {
+
+      checkbox.addEventListener(
+        "change",
+        function () {
+
+          applyFilters();
+
+        }
+      );
+
+    }
+  );
+  /* =====================================================
+   CLEAR ALL
+   ===================================================== */
+
+if (clearFilters) {
+  clearFilters.addEventListener("click", function () {
+
+    // ล้าง checkbox
+    document.querySelectorAll('input[name="brandFilter"]').forEach(cb => {
+      cb.checked = false;
+    });
+
+    document.querySelectorAll('input[name="sizeFilter"]').forEach(cb => {
+      cb.checked = false;
+    });
+
+    document.querySelectorAll('input[name="conditionFilter"]').forEach(cb => {
+      cb.checked = false;
+    });
+
+    document.querySelectorAll('input[name="priceFilter"]').forEach(cb => {
+      cb.checked = false;
+    });
+
+    // ล้าง Custom Size
+    if (customSizeCheck) {
+      customSizeCheck.checked = false;
+    }
+
+    if (customSizeInput) {
+      customSizeInput.value = "";
+      customSizeInput.style.display = "none";
+    }
+
+    // ล้างช่องค้นหา Brand
+    if (brandSearch) {
+      brandSearch.value = "";
+    }
+
+    // รีเซ็ตปุ่ม Filter by
+    document.querySelectorAll(".filter-button").forEach(button => {
+      button.classList.remove("active");
+    });
+
+    // ล้าง filter ที่แสดงอยู่
+    updateSelectedFilters();
+
+  });
+}
+  /* =====================================================
+     RESET FROM NO RESULT BUTTON
+     ===================================================== */
+
+  document.addEventListener(
+    "click",
+    function (event) {
+
+      if (
+        event.target &&
+        event.target.id ===
+        "resetRealtimeFilters"
+      ) {
+
+        if (clearFilters) {
+
+          clearFilters.click();
+
+        }
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     INITIAL
+     ===================================================== */
+
+  applyFilters();
+
+});
+
+</script>
 
     <?- include('../partials/footer') ?>
+
+
   </body>
+
 </html>
+
