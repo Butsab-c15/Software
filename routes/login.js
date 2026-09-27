@@ -23,6 +23,6 @@ router
   .post(validation(), (req, res, next) => {
     // ผ่านการรวจสอบ ลิ้
     งค์ไปหน้า / me;
-    res.redirect("/me");
+    res.redirect("/dashboard");
   });
 module.exports = router;
