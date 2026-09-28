@@ -1,35 +1,23 @@
 <!---หน้าShop-->
 <!doctype html>
 
-
 <html>
   <?- include('../partials/head') -?>
-
-
-
   <body>
-
 
     <?- include('../partials/header') -?>
     <?- include('../partials/nav') -?>
 
-
-
-
     <!-- ================= BRAND MENU(ของฉัน ฉันแก้ไข) ================= -->
-
 
     <section
       class="w-100 border-bottom"
       style="background-color: #e5e7eb !important; height: 40px;"
     >
-
-
       <div
         class="container h-100 d-flex justify-content-center align-items-center gap-4"
         style="font-size: 0.95rem;"
       >
-
 
         <a
           href="/shop"
@@ -107,7 +95,6 @@
 
 
     </section>
-
 
 
 
@@ -584,11 +571,11 @@
                     class="card-body p-0 d-flex flex-column flex-grow-1"
                   >
                     <div>
-                      <span
-                        class="badge <?= product.badgeColor ?> mb-2"
+                     <span
+                        class="badge <?= product.badge_color ?> mb-2"
                       >
-                        <?= product.condition ?>% Condition
-                      </span>
+                        <?= product.condition_percent ?>% Condition
+                    </span>
                     </div>
 
                     <h5 class="fw-bold text-dark">
@@ -602,7 +589,7 @@
                     </p>
                     <!-- Price -->
                     <h4 class="fw-bold text-dark mb-4">
-                      ฿<?= product.price ?>
+                      ฿<?= Number(product.price).toLocaleString() ?>
                     </h4>
 
                     <!-- View Details -->
@@ -638,7 +625,6 @@
         </div>
       </div>
     </section>
->>>>>>> 3882fff
 
    <!-- ================= STYLE ================= -->
 
@@ -2341,9 +2327,6 @@ if (clearFilters) {
 
     <?- include('../partials/footer') ?>
 
->>>>>>> 3882fff
-
   </body>
 
 </html>
-
