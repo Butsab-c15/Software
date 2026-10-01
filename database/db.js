@@ -1,14 +1,21 @@
+require("dotenv").config();
+
+const fs = require("fs");
 const mysql = require("mysql2");
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "1121",
-  database: "ego_db",
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "",
+  database: process.env.DB_NAME || "ego_db",
+  port: process.env.DB_PORT || 3306,
+
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
+
+
 
 db.getConnection((err, connection) => {
   if (err) {
@@ -28,7 +35,7 @@ db.getConnection((err, connection) => {
       password_hash VARCHAR(255) NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB;
-  `,
+    `,
     (createErr) => {
       if (createErr) {
         console.error("Users table setup failed:", createErr.message);
