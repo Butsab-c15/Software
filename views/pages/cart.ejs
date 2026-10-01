@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <?- include('../partials/head') ?>
+  <body class="bg-light">
+    <?- include('../partials/header') ?>
+    <?- include('../partials/nav') ?>
+
+    <!-- ================= SHOPPING CART SECTION ================= -->
+    <section class="py-5">
+      <div class="container">
+        <h2 class="fw-bold mb-4">Shopping Cart</h2>
+        
+        <!-- จุดที่ JavaScript จะนำข้อมูลตะกร้ามาแทรก (ถ้ายังไม่โหลดจะขึ้น Loading เล็กๆ) -->
+        <div id="cart-content" style="min-height: 400px;">
+          <div class="text-center py-5">
+            <div class="spinner-border text-secondary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <?- include('../partials/footer') ?>
+
+  <!-- ================= SCRIPT ดึงข้อมูลตะกร้ามาแสดงผล ================= -->
+    <script>
+      // ฟังก์ชันดึง Key ของตะกร้าตามผู้ใช้ปัจจุบัน
+      function getCartKey() {
+        const userEmail = localStorage.getItem('userEmail');
+        return userEmail ? ('cart_' + userEmail) : 'tempCart';
+      }
+
+      function renderCart() {
+        try {
+          let cartKey = getCartKey();
+          let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+          let cartContent = document.getElementById('cart-content');
+
+          if (!cartContent) return;
+
+          // กรณีตะกร้าว่างเปล่า
+          if (cart.length === 0) {
+            cartContent.innerHTML = `
+              <div class="bg-white rounded-4 shadow-sm p-5 text-center mt-3">
+                <h4 class="text-muted mb-4">ตะกร้าสินค้าของคุณยังว่างอยู่</h4>
+                <a href="/shop" class="btn btn-dark px-4 py-2 rounded-pill fw-bold fs-5">ไปช้อปปิ้งเลย</a>
+              </div>
+            `;
+            return;
+          }
+
+          // กรณีมีสินค้า
+          let totalPrice = 0;
+          let cartHtml = `<div class="row gx-4 gx-lg-5">`;
+          
+          // --- ฝั่งซ้าย: รายการสินค้า ---
+          cartHtml += `<div class="col-lg-7 col-xl-8"><div class="d-flex flex-column">`;
+          
+          cart.forEach((item, index) => {
+            let rawPrice = item.price ? String(item.price) : "0";
+            let itemPrice = parseInt(rawPrice.replace(/,/g, '')) || 0; 
+            totalPrice += itemPrice;
+
+            cartHtml += `
+              <div class="bg-white rounded-4 shadow-sm p-3 mb-4 d-flex align-items-center border-0">
+                <div style="width: 120px; height: 120px; background-color: #f4f4f4;" class="rounded-3 d-flex align-items-center justify-content-center flex-shrink-0 me-4">
+                  <img src="${item.image || ''}" alt="${item.name || 'Product'}" class="img-fluid rounded-3" style="max-height: 80%; object-fit: contain;">
+                </div>
+                <div class="flex-grow-1">
+                  <h5 class="fw-bold mb-1 pe-3" style="max-width: 250px;">${item.name || 'Unnamed Product'}</h5>
+                  <p class="text-muted mb-0" style="font-size: 0.95rem;">Size: ${item.size || '-'}</p>
+                </div>
+                <div class="text-end d-flex flex-column justify-content-center h-100">
+                  <h5 class="fw-bold mb-3">฿ ${item.price || '0'}</h5>
+                  <button class="btn btn-outline-danger btn-sm rounded-pill px-3 py-1 ms-auto d-flex align-items-center" onclick="removeFromCart(${index})" style="width: fit-content;">
+                    <i class="bi bi-trash3 me-1"></i> Remove
+                  </button>
+                </div>
+              </div>
+            `;
+          });
+          
+          cartHtml += `</div></div>`;
+
+          // --- ฝั่งขวา: สรุปยอด (Order Summary) + เลือกการจัดส่ง ---
+          cartHtml += `
+            <div class="col-lg-5 col-xl-4 mt-2 mt-lg-0">
+              <div class="bg-white rounded-4 shadow-sm p-4 border-0 position-sticky" style="top: 20px;">
+                <h4 class="fw-bold mb-4 pb-2">Order Summary</h4>
+                
+                <!-- ตัวเลือกการจัดส่ง -->
+                <h6 class="fw-bold mb-3">Shipping Method</h6>
+                
+                <!-- แบบปกติ -->
+                <label class="border rounded-3 p-3 d-flex justify-content-between align-items-center mb-2 w-100 bg-white shadow-sm" style="cursor: pointer;">
+                  <div class="d-flex align-items-center gap-3">
+                    <input class="form-check-input mt-0 fs-5" type="radio" name="shipping" value="0" checked onchange="updateShippingCost(this.value)">
+                    <div>
+                      <h6 class="mb-0 fw-semibold" style="font-size: 0.95rem;">Standard Delivery </h6>
+                      <small class="text-muted">5-8 Days</small>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <span class="fw-bold text-success" style="font-size: 0.9rem;">Free</span>
+                  </div>
+                </label>
+
+                <!-- แบบด่วน -->
+                <label class="border rounded-3 p-3 d-flex justify-content-between align-items-center mb-4 w-100 bg-white shadow-sm" style="cursor: pointer;">
+                  <div class="d-flex align-items-center gap-3">
+                    <input class="form-check-input mt-0 fs-5" type="radio" name="shipping" value="150" onchange="updateShippingCost(this.value)">
+                    <div>
+                      <h6 class="mb-0 fw-semibold" style="font-size: 0.95rem;">Express Delivery </h6>
+                      <small class="text-muted">1-2 Days</small>
+                    </div>
+                  </div>
+                  <div class="text-end">
+                    <span class="fw-bold text-danger" style="font-size: 0.9rem;">+ ฿150</span>
+                  </div>
+                </label>
+
+                <!-- สรุปยอดเงิน -->
+                <div class="d-flex justify-content-between mb-3 text-muted">
+                  <span>Subtotal (${cart.length} items)</span>
+                  <!-- เก็บค่า Subtotal ไว้ใน data-subtotal เพื่อให้สคริปต์เอาไปบวกเลขต่อได้ง่ายๆ -->
+                  <span class="fw-bold text-dark" id="display-subtotal" data-subtotal="${totalPrice}">฿ ${totalPrice.toLocaleString()}</span>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-4 border-bottom pb-4 text-muted">
+                  <span>Estimated Shipping</span>
+                  <span class="fw-bold text-success" id="display-shipping">Free</span>
+                </div>
+                
+                <div class="d-flex justify-content-between mb-4">
+                  <h4 class="fw-bold">Total</h4>
+                  <h4 class="fw-bold" id="display-total">฿ ${totalPrice.toLocaleString()}</h4>
+                </div>
+                
+                <form action="/checkout" method="GET">
+                  <!-- ซ่อน Input ไว้ส่งค่า Shipping ไปหน้า Checkout -->
+                  <input type="hidden" name="shipping_cost" id="input-shipping-cost" value="0">
+                  <button type="submit" class="btn btn-dark w-100 rounded-pill py-3 fw-bold fs-5 shadow-sm">
+                    Proceed to Checkout
+                  </button>
+                </form>
+              </div>
+            </div>
+          `;
+          
+          cartHtml += `</div>`;
+          cartContent.innerHTML = cartHtml;
+
+        } catch (error) {
+          console.error("Cart render error:", error);
+          document.getElementById('cart-content').innerHTML = `
+            <div class="alert alert-danger rounded-4 p-4 text-center">
+              <h5>เกิดข้อผิดพลาดในการโหลดตะกร้าสินค้า</h5>
+              <p class="mb-0 text-muted">${error.message}</p>
+            </div>
+          `;
+        }
+      }
+
+      // ฟังก์ชันสำหรับอัปเดตราคาเมื่อเปลี่ยนวิธีจัดส่ง
+      function updateShippingCost(cost) {
+        let shippingCost = parseInt(cost);
+        let subtotal = parseInt(document.getElementById('display-subtotal').getAttribute('data-subtotal')) || 0;
+        let total = subtotal + shippingCost;
+
+        // อัปเดตข้อความค่าจัดส่ง (เขียว=ฟรี, แดง=เสียเงิน)
+        let shippingDisplay = document.getElementById('display-shipping');
+        if (shippingCost === 0) {
+          shippingDisplay.innerHTML = 'Free';
+          shippingDisplay.className = 'fw-bold text-success';
+        } else {
+          shippingDisplay.innerHTML = '฿ ' + shippingCost.toLocaleString();
+          shippingDisplay.className = 'fw-bold text-danger';
+        }
+
+        // อัปเดตข้อความยอดรวม
+        document.getElementById('display-total').innerHTML = '฿ ' + total.toLocaleString();
+
+        // อัปเดตค่าส่งเข้าไปในฟอร์ม (เผื่อดึงไปใช้หน้า Checkout)
+        document.getElementById('input-shipping-cost').value = shippingCost;
+      }
+
+      // ฟังก์ชันลบสินค้า
+      function removeFromCart(index) {
+        let cartKey = getCartKey();
+        let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+        cart.splice(index, 1);
+        localStorage.setItem(cartKey, JSON.stringify(cart));
+        
+        renderCart();
+        if (typeof updateCartIcon === "function") {
+          updateCartIcon();
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', renderCart);
+    </script>
+  </body>
+</html>

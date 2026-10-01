@@ -5,7 +5,7 @@ const validation = (schema) => {
       name: Joi.string().min(3).max(30).required(),
       email: Joi.string().min(6).required().email(),
       password: Joi.string().min(6).max(15).required(),
-      confirm_password: Joi.ref("password"),
+      confirm_password: Joi.any().valid(Joi.ref("password")).required(),
     });
     const result = schema.validate(req.body);
     if (result.error == undefined) next();

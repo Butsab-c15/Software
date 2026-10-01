@@ -22,6 +22,14 @@ async function seedDatabase() {
           image
         )
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ON DUPLICATE KEY UPDATE
+          brand = VALUES(brand),
+          name = VALUES(name),
+          price = VALUES(price),
+          size = VALUES(size),
+          condition_percent = VALUES(condition_percent),
+          badge_color = VALUES(badge_color),
+          image = VALUES(image)
         `,
         [
           shoe.id,

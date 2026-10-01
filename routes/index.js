@@ -3,6 +3,7 @@ const router = express.Router();
 router.get("/", function (req, res, next) {
   res.locals.pageData = {
     title: "EGO",
+    active: "home",
   };
   res.render("pages/index");
 });

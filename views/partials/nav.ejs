@@ -1,102 +1,1271 @@
-<!-- แถวบน: Navbar -->
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-0"
-  style="height: 60px"
->
-  <div
-    class="container-fluid d-flex align-items-center justify-content-between h-100 px-5"
-  >
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="/images/imageslogo.png" alt="EGO Logo" height="50" class="me" />
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+
+  <div class="container">
+
+    <!-- =====================================================
+         LOGO
+    ====================================================== -->
+
+    <a
+      class="navbar-brand d-flex align-items-center"
+      href="/"
+    >
+
+      <img
+        src="/images/imageslogo.png"
+        alt="EGO Logo"
+        height="65"
+        class="me"
+      />
+
     </a>
 
-    <!-- ปุ่มสำหรับมือถือ -->
+
+    <!-- =====================================================
+         MOBILE MENU
+    ====================================================== -->
+
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarMenu"
     >
+
       <span class="navbar-toggler-icon"></span>
+
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarMenu">
-      <!-- เมนูซ้าย -->
-      <ul class="navbar-nav ms-1" style="gap: 1px;">
-  <li class="nav-item">
-    <a class="nav-link <%= pageData.active === 'home' ? 'active-menu' : '' %>" 
-       href="/" 
-       style="padding: 4px 10px !important; margin: 0 !important;">
-      Home
-    </a>
-  </li>
+
+    <div
+      class="collapse navbar-collapse"
+      id="navbarMenu"
+    >
 
 
-  <li class="nav-item">
-    <a class="nav-link <%= pageData.active === 'shop' ? 'active-menu' : '' %>" 
-       href="/shop" 
-       style="padding: 4px 10px !important; margin: 0 !important;">
-      Shop
-    </a>
-  </li>
-</ul>
+      <!-- =====================================================
+           MENU
+      ====================================================== -->
 
-<!-- Search -->
-<form class="d-flex mx-auto search-box w-100"
-      style="max-width: 500px;"
-      id="globalSearchForm"
-      action="/shop"
-      method="GET">
+      <ul class="navbar-nav ms-3">
 
-  <div class="col-11 h-100 d-flex align-items-center justify-content-center">
+        <li class="nav-item">
 
-    <div class="input-group bg-light rounded-1"
-         style="background-color: #434242; height: 36px; width: 100%; max-width: 500px;">
+          <a
+            class="nav-link <?= pageData.active === 'home' ? 'active-menu' : '' ?>"
+            href="/"
+          >
+            Home
+          </a>
 
-      <span class="input-group-text bg-transparent border-0 pe-2 text-muted d-flex align-items-center">
-        <i class="bi bi-search" style="font-size: 0.85rem;"></i>
-      </span>
+        </li>
 
-    <input
-      id="globalSearch"
-      name="q"
-      class="form-control bg-transparent border-0 ps-1 h-100"
-      type="search"
-      placeholder="Search for brands, products, and more"
-      autocomplete="off"
-      style="box-shadow: none; font-size: 0.85rem;"
-    />
+
+        <li class="nav-item">
+
+          <a
+            class="nav-link <?= pageData.active === 'shop' ? 'active-menu' : '' ?>"
+            href="/shop"
+          >
+            Shop
+          </a>
+
+        </li>
+
+      </ul>
+
+
+      <!-- =====================================================
+           SEARCH
+      ====================================================== -->
+
+      <form
+        class="d-flex mx-auto"
+        style="width:500px"
+        action="/shop"
+        method="GET"
+      >
+
+        <div class="input-group">
+
+          <span
+            class="input-group-text bg-white border-end-0"
+          >
+
+            <i class="bi bi-search"></i>
+
+          </span>
+
+
+          <input
+            class="form-control border-start-0"
+            type="search"
+            name="q"
+            placeholder="Search for brands, products, and more"
+            autocomplete="off"
+          />
+
+        </div>
+
+      </form>
+
+
+      <!-- =====================================================
+           RIGHT MENU
+      ====================================================== -->
+
+      <ul class="navbar-nav align-items-center">
+
+
+        <!-- ===================================================
+             WISHLIST BUTTON
+        ==================================================== -->
+
+        <li
+          class="nav-item position-relative me-2"
+        >
+
+          <button
+            type="button"
+            class="nav-link border-0 bg-transparent"
+            onclick="openWishlist()"
+            title="Wishlist"
+          >
+
+            <i
+              id="nav-wishlist-icon"
+              class="bi bi-heart fs-5"
+            ></i>
+
+
+            <span
+              id="wishlist-badge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+              style="font-size:.65rem"
+            >
+              0
+            </span>
+
+          </button>
+
+        </li>
+
+
+        <!-- ===================================================
+             CART
+        ==================================================== -->
+
+        <li
+          class="nav-item position-relative me-3"
+        >
+
+          <a
+            class="nav-link"
+            href="/cart"
+          >
+
+            <i class="bi bi-bag fs-5"></i>
+
+
+            <span
+              id="cart-badge"
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none"
+              style="font-size:.65rem"
+            >
+              0
+            </span>
+
+          </a>
+
+        </li>
+
+
+        <!-- ===================================================
+             LOGIN
+        ==================================================== -->
+
+        <li class="nav-item">
+
+          <a
+            class="btn btn-dark ms-3"
+            href="/login"
+            id="nav-login-btn"
+          >
+            Login
+          </a>
+
+        </li>
+
+      </ul>
+
     </div>
 
   </div>
 
-</form>
-     
-      <!-- เมนูขวา --> 
-       <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom p-0" style="height: 60px;">
-        <div class="d-flex align-items-center gap-4 h-100">
-  
-      <!-- ไอคอน Heart (ลบ padding ออกเพื่อให้ขนานแนวดิ่งพอดี) -->
-          <a class="text-dark p-0 d-flex align-items-center text-decoration-none" href="#">
-            <i class="bi bi-heart" style="font-size: 1.15rem;"></i>
-          </a>
-
-      <!-- ไอคอน Bag -->
-          <a class="text-dark p-0 d-flex align-items-center text-decoration-none" href="#">
-            <i class="bi bi-bag" style="font-size: 1.15rem;"></i>
-          </a>
+</nav>
 
 
-      <!-- ปุ่ม Login ทรงเหลี่ยมมนเล็กน้อย (คุมความสูง 36px ให้สูงเท่ากับช่อง Search) -->
-          <a class="btn btn-dark rounded-1 px-3 d-flex align-items-center justify-content-center text-decoration-none" 
-             href="/login" 
-            style="font-size: 0.85rem; height: 36px; font-weight: 500;">
-              Login
-          </a>
-          
 
-        </div>   
+<!-- =========================================================
+     WISHLIST MODAL
+========================================================= -->
+
+<div
+  class="modal fade"
+  id="wishlistModal"
+  tabindex="-1"
+  aria-hidden="true"
+>
+
+  <div
+    class="modal-dialog modal-dialog-centered modal-lg"
+  >
+
+    <div
+      class="modal-content border-0 rounded-4 shadow"
+    >
+
+
+      <!-- ===================================================
+           HEADER
+      ==================================================== -->
+
+      <div class="modal-header">
+
+        <h5 class="modal-title fw-bold">
+
+          <i
+            class="bi bi-heart-fill text-danger me-2"
+          ></i>
+
+          รายการที่ชอบ
+
+        </h5>
+
+
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+        ></button>
+
+      </div>
+
+
+      <!-- ===================================================
+           BODY
+      ==================================================== -->
+
+      <div class="modal-body">
+
+        <div
+          id="wishlist-container"
+        ></div>
+
+      </div>
+
+
+      <!-- ===================================================
+           FOOTER
+      ==================================================== -->
+
+      <div class="modal-footer">
+
+        <button
+          type="button"
+          class="btn btn-dark rounded-pill px-4"
+          data-bs-dismiss="modal"
+        >
+          ปิด
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
-</nav>
+
+
+
+<script>
+
+/* =========================================================
+   CART
+========================================================= */
+
+function getActiveCart() {
+
+  const email =
+    localStorage.getItem(
+      'userEmail'
+    );
+
+
+  try {
+
+    return JSON.parse(
+      localStorage.getItem(
+        email
+          ? 'cart_' + email
+          : 'tempCart'
+      )
+    ) || [];
+
+  } catch (error) {
+
+    console.error(
+      'Cart parse error:',
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   UPDATE CART ICON
+========================================================= */
+
+function updateCartIcon() {
+
+  const badge =
+    document.getElementById(
+      'cart-badge'
+    );
+
+
+  if (!badge) {
+
+    return;
+
+  }
+
+
+  const count =
+    getActiveCart().length;
+
+
+  badge.innerText =
+    count;
+
+
+  badge.classList.toggle(
+    'd-none',
+    count === 0
+  );
+
+}
+
+
+
+/* =========================================================
+   GET CURRENT USER
+========================================================= */
+
+function getNavCurrentUser() {
+
+  try {
+
+    const userData =
+      localStorage.getItem(
+        'userData'
+      );
+
+
+    if (!userData) {
+
+      return null;
+
+    }
+
+
+    const user =
+      JSON.parse(userData);
+
+
+    if (
+      !user ||
+      !user.id
+    ) {
+
+      return null;
+
+    }
+
+
+    const id =
+      Number(user.id);
+
+
+    if (
+      !Number.isInteger(id) ||
+      id <= 0
+    ) {
+
+      return null;
+
+    }
+
+
+    return {
+      ...user,
+      id: id
+    };
+
+  } catch (error) {
+
+    console.error(
+      'User data parse error:',
+      error
+    );
+
+    return null;
+
+  }
+
+}
+
+
+
+/* =========================================================
+   GET USER ID
+========================================================= */
+
+function getNavUserId() {
+
+  const user =
+    getNavCurrentUser();
+
+
+  if (!user) {
+
+    return null;
+
+  }
+
+
+  return user.id;
+
+}
+
+
+
+/* =========================================================
+   LOAD WISHLIST FROM MYSQL
+========================================================= */
+
+async function getWishlistFromDatabase() {
+
+  const userId =
+    getNavUserId();
+
+
+  /*
+   * ถ้ายังไม่ได้ Login
+   * ไม่มี Wishlist
+   */
+
+  if (!userId) {
+
+    return [];
+
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        '/api/favorites',
+        {
+          method: 'GET',
+
+          headers: {
+            'X-User-Id':
+              String(userId)
+          }
+        }
+      );
+
+
+    /*
+     * ถ้า Server ตอบ error
+     */
+
+    if (!response.ok) {
+
+      console.error(
+        'Get wishlist failed:',
+        response.status
+      );
+
+      return [];
+
+    }
+
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      'Wishlist from database:',
+      data
+    );
+
+
+    if (
+      !data.success
+    ) {
+
+      return [];
+
+    }
+
+
+    return Array.isArray(
+      data.favorites
+    )
+      ? data.favorites
+      : [];
+
+  } catch (error) {
+
+    console.error(
+      'Load wishlist error:',
+      error
+    );
+
+    return [];
+
+  }
+
+}
+
+
+
+/* =========================================================
+   UPDATE WISHLIST ICON
+   ใช้ข้อมูลจาก MYSQL
+========================================================= */
+
+async function updateWishlistIcon() {
+
+  const badge =
+    document.getElementById(
+      'wishlist-badge'
+    );
+
+
+  const icon =
+    document.getElementById(
+      'nav-wishlist-icon'
+    );
+
+
+  if (!badge) {
+
+    return;
+
+  }
+
+
+  const wishlist =
+    await getWishlistFromDatabase();
+
+
+  const count =
+    wishlist.length;
+
+
+  /*
+   * แสดงจำนวน
+   */
+
+  badge.innerText =
+    count;
+
+
+  /*
+   * ซ่อน badge ถ้าไม่มีสินค้า
+   */
+
+  badge.classList.toggle(
+    'd-none',
+    count === 0
+  );
+
+
+  /*
+   * เปลี่ยน icon
+   */
+
+  if (icon) {
+
+    icon.className =
+      count > 0
+        ? 'bi bi-heart-fill text-danger fs-5'
+        : 'bi bi-heart fs-5';
+
+  }
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value) {
+
+  return String(
+    value ?? ''
+  )
+
+    .replace(
+      /&/g,
+      '&amp;'
+    )
+
+    .replace(
+      /</g,
+      '&lt;'
+    )
+
+    .replace(
+      />/g,
+      '&gt;'
+    )
+
+    .replace(
+      /"/g,
+      '&quot;'
+    )
+
+    .replace(
+      /'/g,
+      '&#039;'
+    );
+
+}
+
+
+
+/* =========================================================
+   OPEN WISHLIST
+========================================================= */
+
+async function openWishlist() {
+
+  const userId =
+    getNavUserId();
+
+
+  /*
+   * ถ้ายังไม่ได้ Login
+   * ให้ไป Login ก่อน
+   */
+
+  if (!userId) {
+
+    const currentUrl =
+      window.location.pathname +
+      window.location.search;
+
+
+    window.location.href =
+      `/login?redirect=${encodeURIComponent(
+        currentUrl
+      )}`;
+
+    return;
+
+  }
+
+
+  /*
+   * โหลดข้อมูลจาก Database
+   */
+
+  await renderWishlist();
+
+
+  /*
+   * อัปเดตหัวใจด้านบน
+   */
+
+  await updateWishlistIcon();
+
+
+  /*
+   * เปิด Modal
+   */
+
+  const modalElement =
+    document.getElementById(
+      'wishlistModal'
+    );
+
+
+  if (!modalElement) {
+
+    return;
+
+  }
+
+
+  if (
+    typeof bootstrap ===
+    'undefined'
+  ) {
+
+    console.error(
+      'Bootstrap is not loaded'
+    );
+
+    return;
+
+  }
+
+
+  const modal =
+    bootstrap.Modal.getOrCreateInstance(
+      modalElement
+    );
+
+
+  modal.show();
+
+}
+
+
+
+/* =========================================================
+   RENDER WISHLIST
+   ใช้ข้อมูลจาก MYSQL
+========================================================= */
+
+async function renderWishlist() {
+
+  const container =
+    document.getElementById(
+      'wishlist-container'
+    );
+
+
+  if (!container) {
+
+    return;
+
+  }
+
+
+  /*
+   * แสดง Loading
+   */
+
+  container.innerHTML = `
+
+    <div class="text-center py-5">
+
+      <div
+        class="spinner-border text-dark mb-3"
+        role="status"
+      ></div>
+
+      <div class="text-muted">
+        กำลังโหลดรายการที่ชอบ...
+      </div>
+
+    </div>
+
+  `;
+
+
+  /*
+   * โหลดจาก MySQL
+   */
+
+  const wishlist =
+    await getWishlistFromDatabase();
+
+
+  /*
+   * ไม่มีสินค้า
+   */
+
+  if (
+    wishlist.length === 0
+  ) {
+
+    container.innerHTML = `
+
+      <div class="text-center py-5">
+
+        <i
+          class="bi bi-heart fs-1 text-muted"
+        ></i>
+
+        <h5 class="fw-bold mt-3">
+          ยังไม่มีสินค้าที่ชอบ
+        </h5>
+
+        <p class="text-muted mb-0">
+          กดหัวใจที่สินค้าที่คุณสนใจ
+        </p>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  /*
+   * มีสินค้า
+   */
+
+  container.innerHTML =
+    wishlist
+      .map(
+        item => `
+
+          <div
+            class="d-flex align-items-center border rounded-4 p-3 mb-3"
+          >
+
+
+            <!-- IMAGE -->
+
+            <img
+              src="${escapeHtml(
+                item.image
+              )}"
+              alt="${escapeHtml(
+                item.name
+              )}"
+              style="
+                width:90px;
+                height:90px;
+                object-fit:contain;
+              "
+              class="rounded-3 bg-light me-3"
+            />
+
+
+            <!-- INFO -->
+
+            <div class="flex-grow-1">
+
+              <div class="fw-bold">
+                ${escapeHtml(
+                  item.name
+                )}
+              </div>
+
+
+              <div class="text-muted small">
+                ${escapeHtml(
+                  item.brand
+                )}
+              </div>
+
+
+              <div class="fw-bold mt-1">
+                ฿${escapeHtml(
+                  item.price
+                )}
+              </div>
+
+
+              ${
+                item.size
+                  ? `
+                    <div class="text-muted small">
+                      Size:
+                      ${escapeHtml(
+                        item.size
+                      )}
+                    </div>
+                  `
+                  : ''
+              }
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div
+              class="d-flex gap-2"
+            >
+
+
+              <!-- VIEW PRODUCT -->
+
+              <a
+                href="/shop/${encodeURIComponent(
+                  item.id
+                )}"
+                class="btn btn-dark rounded-pill"
+              >
+                ดูสินค้า
+              </a>
+
+
+              <!-- REMOVE -->
+
+              <button
+                type="button"
+                class="btn btn-outline-danger rounded-pill"
+                onclick="removeFromWishlist('${String(
+                  item.id
+                ).replace(
+                  /'/g,
+                  "\\'"
+                )}')"
+              >
+
+                <i
+                  class="bi bi-heartbreak"
+                ></i>
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join('');
+
+}
+
+
+
+/* =========================================================
+   REMOVE WISHLIST
+   ลบจาก MYSQL
+========================================================= */
+
+async function removeFromWishlist(id) {
+
+  const userId =
+    getNavUserId();
+
+
+  /*
+   * ต้อง Login
+   */
+
+  if (!userId) {
+
+    const currentUrl =
+      window.location.pathname +
+      window.location.search;
+
+
+    window.location.href =
+      `/login?redirect=${encodeURIComponent(
+        currentUrl
+      )}`;
+
+    return;
+
+  }
+
+
+  /*
+   * ป้องกันการกดซ้ำ
+   */
+
+  try {
+
+    const response =
+      await fetch(
+        `/api/favorites/${encodeURIComponent(
+          id
+        )}`,
+        {
+          method: 'DELETE',
+
+          headers: {
+            'X-User-Id':
+              String(userId)
+          }
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    console.log(
+      'Remove wishlist:',
+      data
+    );
+
+
+    /*
+     * ลบสำเร็จ
+     */
+
+    if (
+      response.ok &&
+      data.success
+    ) {
+
+      /*
+       * โหลดรายการใหม่
+       */
+
+      await renderWishlist();
+
+
+      /*
+       * อัปเดตจำนวนหัวใจ
+       */
+
+      await updateWishlistIcon();
+
+
+      /*
+       * ถ้า Product page
+       * มีปุ่มหัวใจอยู่ด้วย
+       */
+
+      if (
+        typeof updateWishlistButton ===
+        'function'
+      ) {
+
+        updateWishlistButton(false);
+
+      }
+
+    } else {
+
+      alert(
+        data.message ||
+        'ไม่สามารถลบรายการที่ชอบได้'
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      'Remove wishlist error:',
+      error
+    );
+
+
+    alert(
+      'ไม่สามารถเชื่อมต่อกับ Server ได้'
+    );
+
+  }
+
+}
+
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+function setupLoginButton() {
+
+  const email =
+    localStorage.getItem(
+      'userEmail'
+    );
+
+
+  const button =
+    document.getElementById(
+      'nav-login-btn'
+    );
+
+
+  if (!button) {
+
+    return;
+
+  }
+
+
+  /*
+   * Login แล้ว
+   */
+
+  if (email) {
+
+    button.parentElement.innerHTML = `
+
+      <div
+        class="d-flex align-items-center ms-3 gap-2"
+      >
+
+
+        <!-- USER ACCOUNT -->
+
+        <div class="dropdown">
+
+          <button
+            class="btn btn-dark dropdown-toggle rounded-pill px-3"
+            type="button"
+            data-bs-toggle="dropdown"
+          >
+
+            <i
+              class="bi bi-person-circle me-1"
+            ></i>
+
+            ${escapeHtml(
+              email
+            )}
+
+          </button>
+
+
+          <ul
+            class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2 rounded-3"
+          >
+
+            <li>
+
+              <a
+                class="dropdown-item fw-bold"
+                href="/me"
+              >
+                My Account
+              </a>
+
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <button
+          type="button"
+          class="btn btn-outline-danger rounded-pill px-3"
+          onclick="logout()"
+        >
+
+          <i
+            class="bi bi-box-arrow-right me-1"
+          ></i>
+
+          Logout
+
+        </button>
+
+      </div>
+
+    `;
+
+  } else {
+
+
+    /*
+     * ยังไม่ได้ Login
+     */
+
+    if (
+      ![
+        '/login',
+        '/register'
+      ].includes(
+        window.location.pathname
+      )
+    ) {
+
+      const currentUrl =
+        encodeURIComponent(
+          window.location.pathname +
+          window.location.search
+        );
+
+
+      button.href =
+        `/login?redirect=${currentUrl}`;
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout() {
+
+  localStorage.removeItem(
+    'userEmail'
+  );
+
+
+  localStorage.removeItem(
+    'userData'
+  );
+
+
+  window.location.href =
+    '/';
+
+}
+
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+document.addEventListener(
+  'DOMContentLoaded',
+  async function () {
+
+    /*
+     * Cart
+     */
+
+    updateCartIcon();
+
+
+    /*
+     * Wishlist
+     * โหลดจาก MySQL
+     */
+
+    await updateWishlistIcon();
+
+
+    /*
+     * Login
+     */
+
+    setupLoginButton();
+
+  }
+);
+
+</script>

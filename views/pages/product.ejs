@@ -1,97 +1,1510 @@
 <!doctype html>
 <html lang="en">
-  <?- include('../partials/head') ?>
-  <body class="bg-light">
-    <?- include('../partials/header') ?>  <?- include('../partials/nav') ?>
 
-    <!-- ================= BREADCRUMB ================= -->
-    <section class="bg-white border-bottom py-3">
-      <div class="container">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb mb-0" style="font-size: 1.1rem">
-            <li class="breadcrumb-item">
-              <a href="/" class="text-decoration-none text-secondary">Home</a>
-            </li>
-            <li class="breadcrumb-item">
-              <a href="/shop" class="text-decoration-none text-secondary"
-                >Shoes</a
-              >
-            </li>
-            <li class="breadcrumb-item">
-              <a
-                href="/shop?brand=<?- product.brand ?>"
-                class="text-decoration-none text-secondary text-capitalize"
-              >
-                <?- product.brand ?>
-              </a>
-            </li>
-            <li
-              class="breadcrumb-item active text-dark fw-bold"
-              aria-current="page"
-            >
-              <?- product.name ?>
-            </li>
-          </ol>
-        </nav>
-      </div>
-    </section>
+<?- include('../partials/head') ?>
 
-    <!-- ================= PRODUCT DETAILS ================= -->
-    <section class="py-5">
-      <div class="container">
-        <div class="row gx-5">
-          <div class="col-md-6 mb-4 mb-md-0">
-            <div
-              class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center justify-content-center"
-              style="height: 500px"
+<body class="bg-light">
+
+  <?- include('../partials/header') ?>
+  <?- include('../partials/nav') ?>
+
+
+  <!-- =====================================================
+       BREADCRUMB
+  ====================================================== -->
+
+  <section class="bg-white border-bottom py-3">
+
+    <div class="container">
+
+      <nav aria-label="breadcrumb">
+
+        <ol
+          class="breadcrumb mb-0"
+          style="font-size:1.1rem"
+        >
+
+          <li class="breadcrumb-item">
+            <a
+              href="/"
+              class="text-decoration-none text-secondary"
             >
-              <img
-                src="<?- product.image ?>"
-                alt="<?- product.name ?>"
-                class="img-fluid"
-                style="max-height: 100%; object-fit: contain"
-              />
-            </div>
+              Home
+            </a>
+          </li>
+
+          <li class="breadcrumb-item">
+
+            <a
+              href="/shop"
+              class="text-decoration-none text-secondary"
+            >
+              Shoes
+            </a>
+
+          </li>
+
+          <li class="breadcrumb-item">
+
+            <a
+              href="/shop?brand=<?= encodeURIComponent(product.brand) ?>"
+              class="text-decoration-none text-secondary text-capitalize"
+            >
+              <?= product.brand ?>
+            </a>
+
+          </li>
+
+          <li
+            class="breadcrumb-item active text-dark fw-bold"
+            aria-current="page"
+          >
+            <?= product.name ?>
+          </li>
+
+        </ol>
+
+      </nav>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       PRODUCT
+  ====================================================== -->
+
+  <section class="py-5">
+
+    <div class="container">
+
+      <div class="row gx-5">
+
+
+        <!-- =================================================
+             PRODUCT IMAGE
+        ================================================== -->
+
+        <div class="col-md-6 mb-4 mb-md-0">
+
+          <div
+            class="bg-white rounded-4 shadow-sm p-4 d-flex align-items-center justify-content-center"
+            style="height:500px"
+          >
+
+            <img
+              src="<?= product.image ?>"
+              alt="<?= product.name ?>"
+              class="img-fluid"
+              style="
+                max-height:100%;
+                max-width:100%;
+                object-fit:contain;
+              "
+            />
+
           </div>
 
-          <div class="col-md-6 d-flex flex-column justify-content-center">
-          
+        </div>
 
-            <h1 class="fw-bold text-dark mb-2"><?- product.name ?></h1>
-            <p class="text-muted text-capitalize fs-5 mb-4">
-              Brand: <?- product.brand ?>
+
+        <!-- =================================================
+             PRODUCT DETAIL
+        ================================================== -->
+
+        <div
+          class="col-md-6 d-flex flex-column justify-content-center"
+        >
+
+
+          <!-- =================================================
+               PRODUCT NAME + FAVORITE
+          ================================================== -->
+
+          <div
+            class="d-flex align-items-start justify-content-between gap-3"
+          >
+
+            <div>
+
+              <h1 class="fw-bold text-dark mb-2">
+                <?= product.name ?>
+              </h1>
+
+              <p
+                class="text-muted text-capitalize fs-5 mb-0"
+              >
+                Brand: <?= product.brand ?>
+              </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FAVORITE BUTTON
+            ================================================== -->
+
+            <button
+              type="button"
+              id="wishlistButton"
+              class="btn btn-outline-dark rounded-circle d-flex align-items-center justify-content-center"
+              style="
+                width:56px;
+                height:56px;
+                min-width:56px;
+                font-size:1.5rem;
+              "
+              onclick="toggleWishlist()"
+              aria-label="Add to wishlist"
+              title="Add to wishlist"
+            >
+
+              <i
+                id="wishlistIcon"
+                class="bi bi-heart"
+              ></i>
+
+            </button>
+
+          </div>
+
+
+          <!-- =================================================
+               PRICE
+          ================================================== -->
+
+          <h2
+            class="fw-bold text-dark mb-4 mt-4"
+            style="font-size:2.5rem"
+          >
+            ฿<?= product.price ?>
+          </h2>
+
+
+          <!-- =================================================
+               SIZE
+          ================================================== -->
+
+          <div class="mb-4">
+
+            <p class="fw-bold mb-2 fs-5">
+              Size
             </p>
 
-            <h2 class="fw-bold text-dark mb-4" style="font-size: 2.5rem">
-              ฿<?- product.price ?>
-            </h2>
-
-            <div class="mb-4">
-              <p class="fw-bold mb-2 fs-5">Size</p>
-              <div
-                class="border border-2 border-dark rounded d-inline-block px-4 py-2 fs-5 fw-bold bg-white shadow-sm"
-              >
-                <?- product.size ?>
-              </div>
+            <div
+              class="border border-2 border-dark rounded d-inline-block px-4 py-2 fs-5 fw-bold bg-white shadow-sm"
+            >
+              <?= product.size ?>
             </div>
 
-            <hr class="my-4" />
-
-            <div class="d-grid gap-3">
-              <button class="btn btn-dark btn-lg rounded-pill py-3 fw-bold">
-                Buy Now
-              </button>
-              <button
-                class="btn btn-outline-dark btn-lg rounded-pill py-3 fw-bold"
-              >
-                Add to Cart
-              </button>
-            </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <?- include('../partials/footer') ?>
-  </body>
+
+          <!-- =================================================
+               CONDITION
+          ================================================== -->
+
+          <? if (
+            typeof product.condition_percent !== 'undefined'
+          ) { ?>
+
+            <p class="text-muted mb-4">
+
+              Condition:
+
+              <strong>
+                <?= product.condition_percent ?>%
+              </strong>
+
+            </p>
+
+          <? } ?>
+
+
+          <hr class="my-4">
+
+
+          <!-- =================================================
+               BUY / CART
+          ================================================== -->
+
+          <div class="d-grid gap-3">
+
+            <button
+              type="button"
+              class="btn btn-dark btn-lg rounded-pill py-3 fw-bold"
+              onclick="handleBuyNow()"
+            >
+              Buy Now
+            </button>
+
+
+            <button
+              type="button"
+              class="btn btn-outline-dark btn-lg rounded-pill py-3 fw-bold"
+              onclick="handleAddToCart()"
+            >
+              Add to Cart
+            </button>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       BUY NOW MODAL
+  ====================================================== -->
+
+  <div
+    class="modal fade"
+    id="buyNowModal"
+    tabindex="-1"
+    aria-hidden="true"
+  >
+
+    <div class="modal-dialog modal-dialog-centered">
+
+      <div
+        class="modal-content border-0 rounded-4 shadow"
+      >
+
+        <form
+          onsubmit="handleBuyNowSubmit(event)"
+        >
+
+          <div class="modal-header border-0">
+
+            <h5 class="modal-title fw-bold">
+              เลือกวิธีจัดส่ง
+            </h5>
+
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+
+          </div>
+
+
+          <div class="modal-body pt-0">
+
+
+            <!-- STANDARD -->
+
+            <div
+              class="form-check border rounded-3 p-3 mb-2"
+            >
+
+              <input
+                class="form-check-input ms-0 me-2"
+                type="radio"
+                name="shipping"
+                id="standard"
+                value="standard"
+                checked
+              >
+
+              <label
+                class="form-check-label"
+                for="standard"
+              >
+
+                <strong>
+                  Standard Delivery
+                </strong>
+
+                <br>
+
+                <small class="text-muted">
+                  5-8 Days · Free
+                </small>
+
+              </label>
+
+            </div>
+
+
+            <!-- EXPRESS -->
+
+            <div
+              class="form-check border rounded-3 p-3"
+            >
+
+              <input
+                class="form-check-input ms-0 me-2"
+                type="radio"
+                name="shipping"
+                id="express"
+                value="express"
+              >
+
+              <label
+                class="form-check-label"
+                for="express"
+              >
+
+                <strong>
+                  Express Delivery
+                </strong>
+
+                <br>
+
+                <small class="text-muted">
+                  1-2 Days · +฿150
+                </small>
+
+              </label>
+
+            </div>
+
+          </div>
+
+
+          <div class="modal-footer border-0">
+
+            <button
+              type="button"
+              class="btn btn-light rounded-pill"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-dark rounded-pill px-4"
+            >
+              Continue to Checkout
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+
+  <div
+    class="position-fixed top-0 end-0 p-3"
+    style="z-index:1080"
+  >
+
+    <div
+      id="cartToast"
+      class="toast align-items-center text-bg-dark border-0 shadow-lg rounded-pill"
+      role="alert"
+      data-bs-delay="2500"
+    >
+
+      <div class="d-flex">
+
+        <div
+          id="toastMessage"
+          class="toast-body fw-bold"
+        ></div>
+
+        <button
+          type="button"
+          class="btn-close btn-close-white me-2 m-auto"
+          data-bs-dismiss="toast"
+        ></button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       USER DATA
+    ===================================================== */
+
+    let currentUser = null;
+
+    try {
+
+      const userData =
+        localStorage.getItem('userData');
+
+      if (userData) {
+
+        currentUser =
+          JSON.parse(userData);
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        'Cannot read userData:',
+        error
+      );
+
+      currentUser = null;
+
+    }
+
+
+    /* =====================================================
+       USER EMAIL
+    ===================================================== */
+
+    const userEmail =
+      localStorage.getItem('userEmail');
+
+
+    /* =====================================================
+       LOGIN STATUS
+    ===================================================== */
+
+    const isLoggedIn =
+      Boolean(
+        userEmail &&
+        currentUser &&
+        currentUser.id
+      );
+
+
+    /* =====================================================
+       CURRENT PATH
+    ===================================================== */
+
+    const currentUrlPath =
+      window.location.pathname;
+
+
+    /* =====================================================
+       PRODUCT DATA
+    ===================================================== */
+
+    const productData = <?- JSON.stringify({
+      id: product.id,
+      name: product.name,
+      brand: product.brand,
+      price: product.price,
+      image: product.image,
+      size: product.size
+    }) ?>;
+
+
+    console.log(
+      'Product Data =',
+      productData
+    );
+
+
+    /* =====================================================
+       GET CURRENT USER ID
+    ===================================================== */
+
+    function getCurrentUserId() {
+
+      if (
+        !currentUser ||
+        !currentUser.id
+      ) {
+
+        return null;
+
+      }
+
+      const id =
+        Number(currentUser.id);
+
+      if (
+        !Number.isInteger(id) ||
+        id <= 0
+      ) {
+
+        return null;
+
+      }
+
+      return id;
+
+    }
+
+
+    /* =====================================================
+       LOGIN URL
+    ===================================================== */
+
+    function loginUrl(action) {
+
+      return `/login?redirect=${
+        encodeURIComponent(
+          currentUrlPath
+        )
+      }&action=${
+        encodeURIComponent(action)
+      }`;
+
+    }
+
+
+    /* =====================================================
+       UPDATE PRODUCT FAVORITE BUTTON
+    ===================================================== */
+
+    function updateWishlistButton(liked) {
+
+      const button =
+        document.getElementById(
+          'wishlistButton'
+        );
+
+      const icon =
+        document.getElementById(
+          'wishlistIcon'
+        );
+
+
+      if (!button || !icon) {
+
+        return;
+
+      }
+
+
+      if (liked) {
+
+        icon.className =
+          'bi bi-heart-fill text-danger';
+
+        button.classList.remove(
+          'btn-outline-dark'
+        );
+
+        button.classList.add(
+          'border-danger'
+        );
+
+        button.style.color =
+          '#dc3545';
+
+        button.title =
+          'Remove from wishlist';
+
+        button.setAttribute(
+          'aria-label',
+          'Remove from wishlist'
+        );
+
+      } else {
+
+        icon.className =
+          'bi bi-heart';
+
+        button.classList.add(
+          'btn-outline-dark'
+        );
+
+        button.classList.remove(
+          'border-danger'
+        );
+
+        button.style.color =
+          '';
+
+        button.title =
+          'Add to wishlist';
+
+        button.setAttribute(
+          'aria-label',
+          'Add to wishlist'
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       LOAD FAVORITE STATUS FROM MYSQL
+    ===================================================== */
+
+    async function loadFavoriteStatus() {
+
+      const userId =
+        getCurrentUserId();
+
+
+      /*
+       * ถ้ายังไม่ได้ Login
+       * ให้หัวใจเป็นหัวใจว่าง
+       */
+
+      if (!userId) {
+
+        updateWishlistButton(false);
+
+        return;
+
+      }
+
+
+      try {
+
+        const response =
+          await fetch(
+            `/api/favorites/${encodeURIComponent(
+              productData.id
+            )}`,
+            {
+              method: 'GET',
+
+              headers: {
+                'X-User-Id':
+                  String(userId)
+              }
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        console.log(
+          'Favorite status:',
+          data
+        );
+
+
+        if (
+          response.ok &&
+          data.success
+        ) {
+
+          updateWishlistButton(
+            Boolean(data.liked)
+          );
+
+        } else {
+
+          updateWishlistButton(false);
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          'Load favorite status error:',
+          error
+        );
+
+        updateWishlistButton(false);
+
+      }
+
+    }
+
+
+    /* =====================================================
+       TOGGLE WISHLIST
+       MYSQL
+    ===================================================== */
+
+    async function toggleWishlist() {
+
+      /*
+       * ตรวจสอบ Login ก่อน
+       */
+
+      if (!isLoggedIn) {
+
+        window.location.href =
+          loginUrl('wishlist');
+
+        return;
+
+      }
+
+
+      const userId =
+        getCurrentUserId();
+
+
+      if (!userId) {
+
+        alert(
+          'ไม่พบ User ID กรุณา Login ใหม่'
+        );
+
+        return;
+
+      }
+
+
+      const button =
+        document.getElementById(
+          'wishlistButton'
+        );
+
+
+      /*
+       * ป้องกันการกดหัวใจรัว ๆ
+       */
+
+      if (button) {
+
+        button.disabled = true;
+
+      }
+
+
+      try {
+
+        /*
+         * 1. ตรวจสอบก่อนว่าสินค้านี้
+         *    อยู่ใน favorites หรือไม่
+         */
+
+        const checkResponse =
+          await fetch(
+            `/api/favorites/${encodeURIComponent(
+              productData.id
+            )}`,
+            {
+              method: 'GET',
+
+              headers: {
+                'X-User-Id':
+                  String(userId)
+              }
+            }
+          );
+
+
+        const checkData =
+          await checkResponse.json();
+
+
+        console.log(
+          'Check favorite:',
+          checkData
+        );
+
+
+        const currentlyLiked =
+          Boolean(
+            checkData.liked
+          );
+
+
+        /*
+         * =================================================
+         * ถ้ามีอยู่แล้ว
+         * DELETE
+         * =================================================
+         */
+
+        if (currentlyLiked) {
+
+          const response =
+            await fetch(
+              `/api/favorites/${encodeURIComponent(
+                productData.id
+              )}`,
+              {
+                method: 'DELETE',
+
+                headers: {
+                  'X-User-Id':
+                    String(userId)
+                }
+              }
+            );
+
+
+          const data =
+            await response.json();
+
+
+          console.log(
+            'Delete favorite:',
+            data
+          );
+
+
+          if (
+            response.ok &&
+            data.success
+          ) {
+
+            updateWishlistButton(false);
+
+
+            /*
+             * ถ้า nav.js มีฟังก์ชันนี้
+             * จะอัปเดตจำนวนหัวใจด้านบน
+             */
+
+            if (
+              typeof updateWishlistIcon ===
+              'function'
+            ) {
+
+              updateWishlistIcon();
+
+            }
+
+
+            showToast(
+              'นำสินค้าออกจากรายการที่ชอบแล้ว',
+              'remove'
+            );
+
+          } else {
+
+            alert(
+              data.message ||
+              'ไม่สามารถนำสินค้าออกจากรายการที่ชอบได้'
+            );
+
+          }
+
+
+          return;
+
+        }
+
+
+        /*
+         * =================================================
+         * ถ้ายังไม่มี
+         * POST
+         * =================================================
+         */
+
+        const response =
+          await fetch(
+            `/api/favorites/${encodeURIComponent(
+              productData.id
+            )}`,
+            {
+              method: 'POST',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+
+                'X-User-Id':
+                  String(userId)
+              },
+
+              body:
+                JSON.stringify({
+                  user_id: userId
+                })
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        console.log(
+          'Add favorite:',
+          data
+        );
+
+
+        if (
+          response.ok &&
+          data.success
+        ) {
+
+          updateWishlistButton(true);
+
+
+          /*
+           * อัปเดตจำนวนหัวใจใน Navbar
+           */
+
+          if (
+            typeof updateWishlistIcon ===
+            'function'
+          ) {
+
+            updateWishlistIcon();
+
+          }
+
+
+          showToast(
+            'เพิ่มสินค้าในรายการที่ชอบแล้ว',
+            'add'
+          );
+
+        } else {
+
+          alert(
+            data.message ||
+            'ไม่สามารถเพิ่มสินค้าในรายการที่ชอบได้'
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          'Toggle favorite error:',
+          error
+        );
+
+        alert(
+          'ไม่สามารถเชื่อมต่อกับ Server ได้'
+        );
+
+      } finally {
+
+        if (button) {
+
+          button.disabled = false;
+
+        }
+
+      }
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showToast(
+      message,
+      type = 'add'
+    ) {
+
+      const toastMessage =
+        document.getElementById(
+          'toastMessage'
+        );
+
+
+      const toastElement =
+        document.getElementById(
+          'cartToast'
+        );
+
+
+      if (
+        !toastMessage ||
+        !toastElement
+      ) {
+
+        return;
+
+      }
+
+
+      let icon =
+        '<i class="bi bi-check-circle-fill text-success me-2"></i>';
+
+
+      if (type === 'remove') {
+
+        icon =
+          '<i class="bi bi-heartbreak-fill text-danger me-2"></i>';
+
+      }
+
+
+      toastMessage.innerHTML =
+        `${icon}${message}`;
+
+
+      if (
+        typeof bootstrap !==
+        'undefined'
+      ) {
+
+        new bootstrap.Toast(
+          toastElement
+        ).show();
+
+      }
+
+    }
+
+
+    /* =====================================================
+       BUY NOW
+    ===================================================== */
+
+    function handleBuyNow() {
+
+      if (!isLoggedIn) {
+
+        window.location.href =
+          loginUrl('buy');
+
+        return;
+
+      }
+
+
+      const modalElement =
+        document.getElementById(
+          'buyNowModal'
+        );
+
+
+      if (!modalElement) {
+
+        return;
+
+      }
+
+
+      if (
+        typeof bootstrap ===
+        'undefined'
+      ) {
+
+        return;
+
+      }
+
+
+      new bootstrap.Modal(
+        modalElement
+      ).show();
+
+    }
+
+
+    /* =====================================================
+       BUY NOW SUBMIT
+    ===================================================== */
+
+    function handleBuyNowSubmit(event) {
+
+      event.preventDefault();
+
+
+      const shipping =
+        document.querySelector(
+          'input[name="shipping"]:checked'
+        );
+
+
+      const shippingCost =
+        shipping &&
+        shipping.value === 'express'
+          ? 150
+          : 0;
+
+
+      localStorage.setItem(
+        'checkoutItem',
+        JSON.stringify({
+          ...productData,
+          quantity: 1
+        })
+      );
+
+
+      window.location.href =
+        `/checkout?shipping_cost=${shippingCost}`;
+
+    }
+
+
+    /* =====================================================
+       ADD TO CART
+    ===================================================== */
+
+    function handleAddToCart() {
+
+      if (!isLoggedIn) {
+
+        window.location.href =
+          loginUrl('add');
+
+        return;
+
+      }
+
+
+      executeAddToCart();
+
+    }
+
+
+    /* =====================================================
+       EXECUTE ADD TO CART
+    ===================================================== */
+
+    function executeAddToCart() {
+
+      const email =
+        localStorage.getItem(
+          'userEmail'
+        );
+
+
+      const cartKey =
+        email
+          ? 'cart_' + email
+          : 'tempCart';
+
+
+      let cart = [];
+
+
+      try {
+
+        cart =
+          JSON.parse(
+            localStorage.getItem(
+              cartKey
+            )
+          ) || [];
+
+      } catch (error) {
+
+        console.error(
+          'Cart parse error:',
+          error
+        );
+
+        cart = [];
+
+      }
+
+
+      /*
+       * ตรวจสอบว่าสินค้านี้มีในตะกร้าแล้วหรือยัง
+       */
+
+      const existingItemIndex =
+        cart.findIndex(
+          item =>
+            String(item.id) ===
+            String(productData.id)
+        );
+
+
+      if (
+        existingItemIndex !== -1
+      ) {
+
+        cart[
+          existingItemIndex
+        ].quantity =
+          Number(
+            cart[
+              existingItemIndex
+            ].quantity || 0
+          ) + 1;
+
+      } else {
+
+        cart.push({
+
+          ...productData,
+
+          quantity: 1
+
+        });
+
+      }
+
+
+      localStorage.setItem(
+        cartKey,
+        JSON.stringify(cart)
+      );
+
+
+      /*
+       * อัปเดตจำนวนสินค้าใน Navbar
+       */
+
+      if (
+        typeof updateCartIcon ===
+        'function'
+      ) {
+
+        updateCartIcon();
+
+      }
+
+
+      showToast(
+        `เพิ่ม ${productData.name} ลงตะกร้าแล้ว`,
+        'add'
+      );
+
+    }
+
+
+    /* =====================================================
+       AFTER LOGIN ACTION
+    ===================================================== */
+
+    async function processLoginAction() {
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+
+      const action =
+        params.get('action');
+
+
+      /*
+       * ไม่มี action
+       */
+
+      if (!action) {
+
+        return;
+
+      }
+
+
+      /*
+       * ต้อง Login ก่อน
+       */
+
+      if (!isLoggedIn) {
+
+        return;
+
+      }
+
+
+      const userId =
+        getCurrentUserId();
+
+
+      if (!userId) {
+
+        return;
+
+      }
+
+
+      /*
+       * =================================================
+       * LOGIN -> WISHLIST
+       * =================================================
+       */
+
+      if (
+        action === 'wishlist'
+      ) {
+
+        try {
+
+          /*
+           * ตรวจสอบก่อนว่าใน Database
+           * มีรายการนี้อยู่แล้วหรือไม่
+           */
+
+          const checkResponse =
+            await fetch(
+              `/api/favorites/${encodeURIComponent(
+                productData.id
+              )}`,
+              {
+                method: 'GET',
+
+                headers: {
+                  'X-User-Id':
+                    String(userId)
+                }
+              }
+            );
+
+
+          const checkData =
+            await checkResponse.json();
+
+
+          /*
+           * ถ้ายังไม่มีจริง ๆ
+           * จึงค่อยเพิ่ม
+           */
+
+          if (!checkData.liked) {
+
+            const response =
+              await fetch(
+                `/api/favorites/${encodeURIComponent(
+                  productData.id
+                )}`,
+                {
+                  method: 'POST',
+
+                  headers: {
+                    'Content-Type':
+                      'application/json',
+
+                    'X-User-Id':
+                      String(userId)
+                  },
+
+                  body:
+                    JSON.stringify({
+                      user_id: userId
+                    })
+                }
+              );
+
+
+            const data =
+              await response.json();
+
+
+            console.log(
+              'Favorite after login:',
+              data
+            );
+
+
+            if (
+              response.ok &&
+              data.success
+            ) {
+
+              updateWishlistButton(true);
+
+
+              if (
+                typeof updateWishlistIcon ===
+                'function'
+              ) {
+
+                updateWishlistIcon();
+
+              }
+
+            }
+
+          } else {
+
+            updateWishlistButton(true);
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            'Save favorite after login error:',
+            error
+          );
+
+        }
+
+      }
+
+
+      /*
+       * =================================================
+       * LOGIN -> BUY
+       * =================================================
+       */
+
+      if (
+        action === 'buy'
+      ) {
+
+        handleBuyNow();
+
+      }
+
+
+      /*
+       * =================================================
+       * LOGIN -> ADD CART
+       * =================================================
+       */
+
+      if (
+        action === 'add'
+      ) {
+
+        executeAddToCart();
+
+      }
+
+
+      /*
+       * เอา action ออกจาก URL
+       */
+
+      window.history.replaceState(
+        {},
+        document.title,
+        currentUrlPath
+      );
+
+    }
+
+
+    /* =====================================================
+       PAGE LOAD
+    ===================================================== */
+
+    document.addEventListener(
+      'DOMContentLoaded',
+      async function () {
+
+        /*
+         * โหลดสถานะหัวใจจาก MySQL
+         */
+
+        await loadFavoriteStatus();
+
+
+        /*
+         * ตรวจสอบว่ากลับมาจาก Login หรือไม่
+         */
+
+        await processLoginAction();
+
+      }
+    );
+
+  </script>
+
+
+  <?- include('../partials/footer') ?>
+
+</body>
+
 </html>

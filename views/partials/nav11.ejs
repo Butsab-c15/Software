@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/images/imageslogo.png" alt="EGO Logo" height="65" class="me" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-3">
+        <li class="nav-item"><a class="nav-link <%= pageData.active === 'home' ? 'active-menu' : '' %>" href="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link <%= pageData.active === 'shop' ? 'active-menu' : '' %>" href="/shop">Shop</a></li>
+      </ul>
+
+      <form class="d-flex mx-auto" style="width:500px" action="/shop" method="GET">
+        <div class="input-group">
+          <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
+          <input class="form-control border-start-0" type="search" name="q" placeholder="Search for brands, products, and more" autocomplete="off" />
+        </div>
+      </form>
+
+      <ul class="navbar-nav align-items-center">
+        <li class="nav-item"><a class="nav-link" href="#"><i class="bi bi-heart fs-5"></i></a></li>
+        <li class="nav-item position-relative me-3">
+          <a class="nav-link" href="/cart">
+            <i class="bi bi-bag fs-5"></i>
+            <span id="cart-badge" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger d-none" style="font-size:.65rem">0</span>
+          </a>
+        </li>
+        <li class="nav-item"><a class="btn btn-dark ms-3" href="/login" id="nav-login-btn">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<script>
+  function getActiveCart() {
+    const email = localStorage.getItem('userEmail');
+    return JSON.parse(localStorage.getItem(email ? 'cart_' + email : 'tempCart')) || [];
+  }
+
+  function updateCartIcon() {
+    const badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    const count = getActiveCart().length;
+    badge.innerText = count;
+    badge.classList.toggle('d-none', count === 0);
+  }
+
+  function setupLoginButton() {
+    const email = localStorage.getItem('userEmail');
+    const button = document.getElementById('nav-login-btn');
+    if (!button) return;
+
+    if (email) {
+      button.parentElement.innerHTML = `
+        <div class="dropdown ms-3">
+          <button class="btn btn-dark dropdown-toggle rounded-pill px-3" type="button" data-bs-toggle="dropdown">
+            <i class="bi bi-person-circle me-1"></i> ${email}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 mt-2 rounded-3">
+            <li><a class="dropdown-item fw-bold" href="/me">My Account</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><button class="dropdown-item text-danger fw-bold" onclick="logout()">Logout</button></li>
+          </ul>
+        </div>`;
+    } else if (!['/login','/register'].includes(window.location.pathname)) {
+      const currentUrl = encodeURIComponent(window.location.pathname + window.location.search);
+      button.href = `/login?redirect=${currentUrl}`;
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('userEmail');
+    window.location.href = '/';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    updateCartIcon();
+    setupLoginButton();
+  });
+</script>

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <?- include('../partials/head') ?>
+  <body class="bg-light">
+    <?- include('../partials/header') ?> <?- include('../partials/nav') ?>
+
+    <section class="py-5">
+      <div class="container" style="max-width: 500px">
+        <div class="card border-0 shadow-sm rounded-4 p-4 bg-white text-center">
+          <h3 class="fw-bold mb-2">สแกนเพื่อชำระเงิน</h3>
+          <p class="text-muted small mb-4">
+            กรุณาสแกน QR Code ด้านล่างผ่านแอปพลิเคชันธนาคารของคุณ
+          </p>
+
+          <div
+            class="bg-light p-3 rounded-4 d-inline-block mx-auto mb-4 border shadow-sm"
+          >
+            <img
+              src="/images/Pp.jpg"
+              alt="QR PromptPay"
+              class="img-fluid rounded-3"
+              style="max-width: 300px"
+            />
+          </div>
+
+          <div class="mb-4">
+            <span class="text-muted small">ยอดชำระสุทธิ</span>
+            <h2 class="fw-bold text-danger mb-0" id="qr-total-price">฿ 0</h2>
+          </div>
+
+          <button
+            onclick="completeQRPayment()"
+            class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow-sm mb-2"
+          >
+            ยืนยันการชำระเงินสำเร็จ
+          </button>
+
+          <a
+            href="/checkout"
+            class="btn btn-link text-muted text-decoration-none small"
+          >
+            <i class="bi bi-arrow-left me-1"></i> ย้อนกลับไปหน้าสรุปคำสั่งซื้อ
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <?- include('../partials/footer') ?>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // ดึงค่ายอดรวมที่ส่งผ่านมาทาง URL Query String
+        const urlParams = new URLSearchParams(window.location.search);
+        const total = urlParams.get("total") || 0;
+
+        document.getElementById("qr-total-price").innerText =
+          "฿ " + parseInt(total).toLocaleString();
+      });
+
+      function completeQRPayment() {
+        alert("ชำระเงินผ่าน QR Code สำเร็จ!");
+
+        // เคลียร์ตะกร้าและข้อมูลการสั่งซื้อหลังจากชำระเงินสำเร็จ
+        const userEmail = localStorage.getItem("userEmail");
+        const cartKey = userEmail ? "cart_" + userEmail : "tempCart";
+        localStorage.removeItem(cartKey);
+        localStorage.removeItem("checkoutItem");
+        localStorage.removeItem("shippingAddress");
+        localStorage.removeItem("selectedPayment");
+
+        // พาผู้ใช้กลับสู่หน้าแรก
+        window.location.href = "/";
+      }
+    </script>
+  </body>
+</html>
